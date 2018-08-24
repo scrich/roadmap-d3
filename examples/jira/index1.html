@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Jira visualisations</title>
+        <script type="text/javascript" src="../../d3v3/d3.v3.js"></script>
+        <style>
+            .axis path, 
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+            body {background: #eee;}
+
+            svg {background: white;}
+
+            p {padding: 5px;}
+
+            .Discovery {
+                background: #912b88;
+                color:white;
+            }
+            .Alpha {background: #d53880;}
+            .Beta {background: #f47738;}
+            .Live {background: #85994b;}
+            .Retire {background: #bfc1c3;}
+
+        </style>
+    </head>
+    <body>
+    <h1>Jira visualisers</h1>
+        <script type="text/javascript">
+    // Your beautiful D3 code will go 
+        
+    // let's have some timey data
+
+d3.csv("jira.csv", function(error, dataset) {
+    console.log(dataset);
+    console.log(d3.version);
+    console.log(dataset.length+" items in the dataset");
+
+
+    console.log(dataset[0]["Issue key"]);
+
+    console.log(dataset[0]);
+    dataset[0].IssueKey = dataset[0]["Issue key"];
+
+    console.log(dataset[0]);
+    //delete dataset[0]["Issue key"];
+    console.log(dataset[0]);
+
+    // add some proper dates
+
+console.log("loop");
+
+var i;
+for (i=0; i < dataset.length; i++) {
+    dataset[i].dateCreated = new Date(dataset[i].Created);
+    console.log(i);
+};
+
+console.log("end of loop");
+    console.log(dataset);
+
+    // initialise the svg canvas
+    
+    var w = 800;
+    var h = 450;
+    var chartPadding = 30;
+
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    // create a clipping path
+    svg.append("clipPath")
+        .attr("id", "chart-area")
+        .append("rect")
+        .attr("x", chartPadding)
+        .attr("y", chartPadding)
+        .attr("width", w - chartPadding * 2)
+        .attr("height", h - chartPadding * 2);
+
+    // define scales
+
+    var xScale = d3.scale.linear()
+        .domain([0, 500])     // input range
+        .range([50, (w* 0.8)]);      // output range
+
+    var yScale = d3.scale.linear()
+        .domain ([0,400])
+        .range ([(h*.8), 50]);
+
+// @TODO make the scales dynamic from the min and max dates in the dataset
+
+    var extentDate = d3.extent(dataset, function(d) { return d.date; });
+    console.log("extentDate: "+extentDate);
+    console.log(extentDate[0]);
+    console.log(extentDate[1]);
+
+    var extentRealDate = d3.extent(dataset, function(d) {
+        return new Date(d.date);
+    });
+    console.log("extentRealDate: " + extentRealDate);
+
+    var tScale = d3.time.scale()
+        //.domain([new Date("2018-04-01"), new Date("2018-08-01")])
+        /*
+        .domain([
+            new Date(extentDate[0]),
+            new Date(extentDate[1])    
+        ])
+        */
+        .domain(
+            d3.extent(
+                dataset, function(d) {
+                    return new Date(d.date);
+                }
+            )
+        )
+        .range([50, 750]);
+
+/*// .domain(d3.range(dataset.length))
+
+    //    .domain(d3.extent(dataset, function d() {
+            return new Date(d.Created);
+        }))
+        
+*/
+       console.log("dateCreated extent "+ d3.extent(dataset, function d() {
+           return d.dateCreated;
+       }));
+       console.log("Story point extent");
+       console.log (d3.extent(dataset, function d() {
+        return d["Custom field (Story Points)"];
+       }));
+       console.log("dataset ");
+       console.log(dataset);
+
+// change rScale for story points, domain 0,20 not 0,400
+// range 1,10, so we don't get any circle with zero size
+
+    var rScale = d3.scale.linear()
+        .domain([0,20])
+        .range([1, 30]);
+            
+    // define axes    
+
+    var tAxis = d3.svg.axis()
+        .scale(tScale)
+        .orient("bottom")
+        .ticks(d3.time.month, 1)   // 1 month intervals
+        .tickFormat(d3.time.format("%b %y"));
+
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom")
+        .ticks(5);
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .ticks(5);
+
+    svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(0," + (h-chartPadding) + ")")
+        .call(tAxis);
+
+    // create a variable to hold the nodes, based on the data
+
+    // set up colours
+    var colToDo = "#123123";
+    var colDiscovery = "#123123";
+    var colDevelopment = "#123123";
+    var colDone = "#123123";
+    var colDeploy = "#123123";
+    var colTest = "#123123";
+
+    var nodes = dataset.map(function(d){
+        return {
+            radius: rScale(d["Custom field (Story Points)"]),
+            color: eval(setColor(d.status)),
+            //cx: tScale(d.date),
+            cx: tScale(new Date(d.date)),
+            cy: h/2
+        };
+    });
+
+    console.log("extent cx "+d3.extent(nodes, function (d) {return d.cx}));
+    console.log("extent points "+d3.extent(dataset, function (d) {return parseInt(d["Custom field (Story Points)"])}));
+    console.log(nodes);
+    
+
+
+    
+
+
+
+
+
+}); // end of d3.csv
+
+
+
+function setColor(pColor) {
+    //console.log ("function setColor("+pColor+")");
+    //console.log ("We\'ll be returning col"+ pColor.replace(" ", ""));
+    //return "col"+pColor;
+    return "col"+pColor.replace(" ", "");
+}
+
+
+
+        </script>
+
+
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {background: blue;}
+svg {background: white;}
+.subunit { 
+    fill: #ddd; 
+
+        }
+
+        .subunit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+}
+
+.subunit:hover {
+    fill: #eee;
+}
+
+.subunit-label {
+  fill: #777;
+  fill-opacity: 1;
+  font-size: 10px;
+  font-weight: 300;
+  text-anchor: middle;
+}
+
+
+
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 760;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+
+d3.json("bh.json", function(error, uk) {
+  if (error) return console.error(error);
+/*
+    svg.append("path")
+      .datum(topojson.feature(uk, uk.objects.subunits))
+      .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+*/
+
+var subunits = topojson.feature(uk, uk.objects.subunits);
+
+var projection = d3.geo.mercator()
+    .scale(200000)
+    .center([-0.14, 50.85]) // long lat - brighton is -0.14, 50.85
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+
+svg.append("path")
+    .datum(subunits)
+    .attr("d", path);
+
+
+svg.selectAll(".subunit")
+  .data(topojson.feature(uk, uk.objects.subunits).features)
+  .enter().append("path")
+  .attr("class", function(d){
+    return "subunit " + d.id; 
+  })
+  .attr("d", path);
+
+svg.append("path")
+    .datum(topojson.mesh(uk, uk.objects.subunits, function (a, b){
+        return a !== b;
+    }))
+    .attr("d", path)
+    .attr("class", "subunit-boundary");
+
+svg.selectAll(".subunit-label")
+    .data(topojson.feature(uk, uk.objects.subunits).features)
+  .enter().append("text")
+    .attr("class", function(d) { return "subunit-label " + d.properties.WD13CD; })
+    .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+    .attr("dy", ".35em")
+    .text(function(d) { return d.properties.WD13NM; });
+  
+  console.log(uk);
+});
+
+
+
+
+
+</script>

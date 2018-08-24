@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "id": "E05002420",
+      "ward":"Brunswick and Adelaide",
+      "foo": 11000
+    },
+    {
+      "id": "E05002421",
+      "ward":"Central Hove",
+      "foo": 20002
+    },
+    {
+      "id": "E05002422",
+      "ward":"East Brighton",
+      "foo": 13003
+    },
+    {
+      "id": "E05002423",
+      "ward":"Goldsmid",
+      "foo": 30004
+    },
+    {
+      "id": "E05002424",
+      "ward":"Hangleton and Knoll",
+      "foo": 40005
+    },
+    {
+      "id": "E05002425",
+      "ward":"Hanover and Elm Grove",
+      "foo": 50006
+    },
+    {
+      "id": "E05002426",
+      "ward":"Hollingdean and Stanmer",
+      "foo": 10003
+    },
+    {
+      "id": "E05002427",
+      "ward":"Moulsecoomb and Bevendean",
+      "foo": 10004
+    },
+    {
+      "id": "E05002428",
+      "ward":"North Portslade",
+      "foo": 10002
+    },
+    {
+      "id": "E05002429",
+      "ward":"Patcham",
+      "foo": 10001
+    },
+    {
+      "id": "E05002430",
+      "ward":"Preston Park",
+      "foo": 10003
+    },
+    {
+      "id": "E05002431",
+      "ward":"Queen's Park",
+      "foo": 10003
+    },
+    {
+      "id": "E05002432",
+      "ward":"Regency",
+      "foo": 10003
+    },
+    {
+      "id": "E05002433",
+      "ward":"Rottingdean Coastal",
+      "foo": 15000
+    },
+    {
+      "id": "E05002434",
+      "ward":"St. Peter's and North Laine",
+      "foo": 10003
+    },
+    {
+      "id": "E05002435",
+      "ward":"South Portslade",
+      "foo": 20003
+    },
+    {
+      "id": "E05002436",
+      "ward":"Hove Park",
+      "foo": 10003
+    },
+      {
+      "id": "E05002437",
+      "ward":"Westbourne",
+      "foo": 10003
+    },
+      {
+      "id": "E05002438",
+      "ward":"Wish",
+      "foo": 10003
+    },
+      {
+      "id": "E05002439",
+      "ward":"Withdean",
+      "foo": 10003
+    },
+    {
+      "id": "E05002440",
+      "ward":"Woodingdean",
+      "foo": 10003
+    }
+  ]
+}

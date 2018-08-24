@@ -1,0 +1,96 @@
+﻿Summary,Issue key,Issue Type,Status,Created,Updated,Last Viewed,Resolved,Custom field (Story Points)
+reconfigure LOCTA processing in Clearcore,IDB-300,Task,To Do,2018-07-25,2018-07-25,2018-07-25,,8
+Discover how the LOCTA processing in Clearcore should be set up,IDB-299,Task,Discovery,2018-07-25,2018-07-27,2018-07-27,,5
+Business Rule: Indicate excessive internal temperature for a prolonged period (unusually high temperatures (> 27Â°C)),IDB-297,Task,To Do,2018-07-25,2018-07-25,2018-07-25,,13
+Business Rule: Indicate early warning signs of fuel poverty (unusually low temperatures (< 18Â°C)),IDB-284,New Feature,To Do,2018-07-18,2018-07-25,2018-07-25,,3
+Identify the external temperature sensor to develop a relative temperature business rule,IDB-277,Task,Development,2018-07-18,2018-07-27,2018-07-25,,2
+Discover how to retrieve flat numbers via the Synetica API to identify properties,IDB-276,Task,To Do,2018-07-18,2018-07-27,2018-07-25,,3
+Access to the Boomi Atom and Molecule from the outside world,IDB-274,Task,Discovery,2018-07-18,2018-07-27,2018-07-25,,3
+SSO for the Boomi Platform,IDB-272,Task,Done,2018-07-18,2018-07-26,2018-07-27,2018-07-26,8
+"PR002: Within Mendix, the API is not returning any context as to the error",IDB-271,Improvement,Done,2018-07-17,2018-07-17,2018-07-27,2018-07-17,2
+SP002: Create a Logger DB in LIVE,IDB-268,Task,Done,2018-07-11,2018-07-20,2018-07-27,2018-07-13,3
+CCR LIVE to include UPRN's,IDB-267,Task,Done,2018-07-11,2018-07-20,2018-07-27,2018-07-17,1
+PR002: Post Release,IDB-266,Task,Done,2018-07-11,2018-07-23,2018-07-27,2018-07-23,5
+PR002: CAB Approval - Update records,IDB-265,Task,Done,2018-07-11,2018-07-23,2018-07-27,2018-07-23,1
+PR002: CAB Approval - Release,IDB-264,Task,Done,2018-07-11,2018-07-23,2018-07-27,2018-07-23,1
+PR002: CAB Approval - Communications,IDB-263,Task,Done,2018-07-11,2018-07-19,2018-07-27,2018-07-19,2
+PR002: CAB Approval - Operational Setup,IDB-262,Task,Done,2018-07-11,2018-07-23,2018-07-27,2018-07-23,5
+PR002: CAB Approval - Testing,IDB-261,Task,Done,2018-07-11,2018-07-18,2018-07-27,2018-07-18,2
+PR002: CAB Approval - Readiness steps,IDB-260,Task,Done,2018-07-11,2018-07-24,2018-07-27,2018-07-18,2
+PR002: CAB Approval - Information Governance Review,IDB-259,Task,Done,2018-07-11,2018-07-17,2018-07-27,2018-07-17,3
+SP002: DPIA for the Logger,IDB-258,Task,Done,2018-07-11,2018-07-13,2018-07-27,2018-07-13,1
+Agree with IG for access to the Customer Index.,IDB-256,Task,Done,2018-07-11,2018-07-20,2018-07-27,2018-07-20,8
+Obtain DPIA for Council Tax and Benefits,IDB-255,Task,Done,2018-07-11,2018-07-24,2018-07-27,2018-07-24,5
+Obtain DPIA for Achieve,IDB-254,Task,Done,2018-07-11,2018-07-24,2018-07-27,2018-07-24,5
+SQL Demonstration of Customer Index ,IDB-253,Task,Done,2018-07-11,2018-07-20,2018-07-27,2018-07-20,1
+Connect to Synetica API on Boomi Atom using RESTLet,IDB-252,Task,Discovery,2018-07-10,2018-07-27,2018-07-25,,2
+PR002: Create a DPIA,IDB-251,Task,Done,2018-07-10,2018-07-13,2018-07-27,2018-07-13,1
+PR001: Create a DPIA,IDB-250,Task,Done,2018-07-10,2018-07-13,2018-07-27,2018-07-13,1
+Determine if viable to keep Achieve as a ClearCore data feed,IDB-245,New Feature,Deploy,2018-07-05,2018-07-25,2018-07-23,,5
+PR001: Re-schedule the process to run post ClearCore production ,IDB-244,Task,Done,2018-06-29,2018-07-02,2018-07-27,2018-07-02,0.5
+Re-schedule ClearCore to run inline with delivery of REC302 files,IDB-243,Task,Done,2018-06-29,2018-07-03,2018-07-27,2018-07-03,0.5
+PR002: Create a Mendix Front End for CCR Demo,IDB-241,Task,Done,2018-06-27,2018-07-12,2018-07-27,2018-06-29,5
+PR001: Devise a convincing front-end demonstration ,IDB-240,Task,Done,2018-06-27,2018-07-19,2018-07-27,2018-07-19,13
+Connect to Synetica API in Test,IDB-235,Task,Done,2018-06-27,2018-06-29,2018-07-27,2018-06-28,8
+Connect to iCasework API in Test,IDB-230,Task,Done,2018-06-27,2018-07-26,2018-07-23,2018-07-26,8
+API Publishing Procedure,IDB-229,Task,Done,2018-06-25,2018-07-13,2018-07-27,2018-07-13,2
+Amend stored procedure to return if a response for attempted duplicate insert,IDB-228,Improvement,Done,2018-06-25,2018-07-06,2018-07-27,2018-07-06,2
+PR001: CAB Approval - CAB [Standard Change],IDB-227,Task,Done,2018-06-25,2018-07-13,2018-07-27,2018-07-13,1
+PR001: CAB Approval - TPAW [Standard Change],IDB-226,Task,Done,2018-06-25,2018-07-12,2018-07-27,2018-07-12,3
+PR001: CAB Approval - IG [Standard Change],IDB-225,Task,Done,2018-06-25,2018-07-10,2018-07-27,2018-07-10,13
+PR001: E-mail CCR address changes to business customer.,IDB-221,New Feature,Done,2018-06-25,2018-07-03,2018-07-27,2018-07-03,2
+PR002: Carryout code review for process,IDB-218,Story,Done,2018-06-25,2018-07-12,2018-07-18,2018-07-06,8
+SP002: Automatic method to restore process default log level after using exceptional log levels such as WARNING,IDB-212,Improvement,Done,2018-06-22,2018-07-06,2018-07-27,2018-07-06,2
+PR002: Carry out UAT of the CCR update address API to ensure it meets the needs of the business.,IDB-206,Task,Done,2018-06-21,2018-07-17,2018-07-27,2018-07-17,5
+PR001: Carry out UAT of the CCR update process to ensure it meets the needs of the business.,IDB-205,Task,Test,2018-06-21,2018-07-25,2018-07-27,,8
+Create documentation for ClearCore,IDB-200,Task,Done,2018-06-19,2018-06-26,2018-07-27,2018-06-21,5
+Create a Mendix front-end application ready to consume CCR Update Address API,IDB-199,Task,Done,2018-06-15,2018-07-12,2018-07-27,2018-06-19,3
+Connect to the Synetica API in the Boomi Platform to retrieve sensor data.,IDB-188,Task,Discovery,2018-06-13,2018-07-27,2018-07-25,,3
+Obtain DPIA for datasets connected to ClearCore,IDB-181,Task,Development,2018-06-11,2018-07-25,2018-07-27,,5
+Analysis: iWorld to ClearCore automation task,IDB-178,Task,Done,2018-06-11,2018-06-26,2018-07-27,2018-06-26,8
+iWorld API Understanding,IDB-177,Task,To Do,2018-06-11,2018-06-22,2018-07-27,,8
+"As a JID, I need an Introduction to Mendix to understand how it consumes API's.",IDB-175,Story,Done,2018-06-11,2018-06-26,2018-07-27,2018-06-22,3
+"As a developer, I need an API to allow my applications (e.g. Mendix) to publish address changes to CCR.",IDB-173,Story,Done,2018-06-11,2018-07-12,2018-07-27,2018-06-22,8
+PR001: External Code Review: Dell to Code Review,IDB-172,Task,Test,2018-06-11,2018-07-18,2018-07-27,,1
+Code Review: logging process [SP002],IDB-171,Task,Done,2018-06-08,2018-06-26,2018-07-27,2018-06-25,8
+Logger training session and documentation,IDB-169,Task,Done,2018-06-08,2018-06-26,2018-07-27,2018-06-25,3
+Organise a ClearCore consultancy day to understand ClearCore,IDB-167,Task,Done,2018-06-07,2018-06-26,2018-07-27,2018-06-15,3
+Improve the logger process [SP002] to collect metrics,IDB-165,Task,Done,2018-06-07,2018-06-26,2018-07-27,2018-06-18,3
+Create a iPaaS template process to be used for all new processes,IDB-164,Task,Done,2018-06-07,2018-06-26,2018-07-27,2018-06-18,1
+Formulate a formal liaison process with RBTECH ,IDB-163,Task,Done,2018-06-07,2018-06-21,2018-07-27,2018-06-21,3
+"As a data solutions team member, I need the REC302 data from iWorld to be automatically dropped daily into ClearCore for processing.",IDB-162,Story,Done,2018-06-07,2018-06-29,2018-07-27,2018-06-29,3
+Compile and order candidate data sources for Clearcore,IDB-159,Task,Done,2018-06-07,2018-06-26,2018-07-27,2018-06-22,8
+[Data Source Automation - template],IDB-147,Task,To Do,2018-05-24,2018-06-21,2018-07-27,,10
+My Account ID Verification,IDB-146,Task,To Do,2018-05-24,2018-06-21,2018-07-27,,8
+Investigate a number of different and unrelated items,IDB-144,Epic,To Do,2018-05-24,2018-06-21,2018-07-27,,10
+Processing Advice for Anonymising ,IDB-143,Task,Done,2018-05-24,2018-06-06,2018-07-27,2018-06-06,2
+Boomi Naming Convention,IDB-141,Improvement,Done,2018-05-24,2018-06-22,2018-07-27,2018-05-31,2
+Formalise the 'Commit' Process for Boomi Processes,IDB-140,Improvement,Done,2018-05-24,2018-06-22,2018-07-27,2018-06-08,2
+House Keeping on Boomi Platform,IDB-139,Improvement,Done,2018-05-24,2018-06-08,2018-07-27,2018-06-08,1
+Code Review Process,IDB-138,Improvement,Done,2018-05-24,2018-06-22,2018-07-27,2018-05-30,5
+Define and run functional test cases,IDB-137,Improvement,Done,2018-05-24,2018-06-06,2018-07-27,2018-06-06,5
+"Permanent Boomi DIR for INPUT, OUT and LOGGING ",IDB-134,Improvement,Done,2018-05-24,2018-05-31,2018-07-27,2018-05-31,1
+Investigation of Atmosphere function for identifying duplicated records,IDB-132,Improvement,Done,2018-05-24,2018-05-30,2018-07-27,2018-05-30,2
+Confirm the Usability of Test Data,IDB-131,Task,Done,2018-05-24,2018-06-07,2018-07-27,2018-06-07,8
+Test / Production ClearCore Mismatch,IDB-130,Impediment,Done,2018-05-24,2018-05-31,2018-07-27,2018-05-31,0
+Rebuild Test ClearCore Environment,IDB-129,Impediment,Done,2018-05-24,2018-06-04,2018-07-27,2018-05-31,0
+Code Cleanup,IDB-127,Improvement,Done,2018-05-24,2018-06-07,2018-07-27,2018-06-07,3
+Integration Connection Test,IDB-125,Task,Done,2018-05-24,2018-06-07,2018-07-27,2018-06-07,8
+ClearCore Output Process Change,IDB-123,New Feature,Done,2018-05-22,2018-06-05,2018-07-27,2018-06-05,0.5
+ClearCore Output File Location - DEV,IDB-122,New Feature,Done,2018-05-22,2018-05-31,2018-07-27,2018-05-31,2
+Error Cases,IDB-121,New Feature,Done,2018-05-22,2018-06-26,2018-07-27,2018-06-07,8
+Validation: Feed CCR Address changes into ClearCore,IDB-119,Task,Done,2018-05-18,2018-06-25,2018-07-27,2018-06-25,1
+Match the expected address with the actual address changes in the DELTA,IDB-118,Task,Done,2018-05-18,2018-06-26,2018-07-27,2018-06-22,0.5
+Keep a history of address changes in CCR,IDB-117,Task,Done,2018-05-18,2018-05-23,2018-07-27,2018-05-23,0
+Call the CCR 'update address' stored procedure,IDB-116,Task,Done,2018-05-18,2018-05-23,2018-07-27,2018-05-23,1
+Test and refine the Boomi Process,IDB-115,Task,Done,2018-05-18,2018-06-26,2018-07-27,2018-06-07,13
+Build the Boomi Process.,IDB-114,Task,Done,2018-05-18,2018-05-23,2018-07-27,2018-05-23,8
+Breakdown and plan for Boomi process.,IDB-113,Task,Done,2018-05-18,2018-05-21,2018-07-27,2018-05-21,5
+Formalise address format in CCR database - UPRN etc. Add UPRN's to CCR address database match and insert.,IDB-111,Task,Done,2018-05-18,2018-05-18,2018-07-27,2018-05-18,5
+Analyse exsititing CCR client address quality in TEST. Match address with UPRN to LLPG.,IDB-110,Task,Done,2018-05-18,2018-05-18,2018-07-27,2018-05-18,5
+Create test data.,IDB-106,Task,Done,2018-05-18,2018-05-23,2018-07-27,2018-05-23,8
+Gather and collate baseline metrics,IDB-105,New Feature,Done,2018-05-18,2018-06-26,2018-07-27,2018-06-19,8
+Understand ClearCore 'Poll for change' report.,IDB-104,Task,Done,2018-05-18,2018-05-21,2018-07-27,2018-05-21,2
+Pickup changes from ClearCore - consume ClearCore CSV or SQL.,IDB-103,Task,Done,2018-05-18,2018-05-22,2018-07-27,2018-05-22,2
+Understand business processes for CCR,IDB-102,Task,Done,2018-05-17,2018-05-23,2018-07-27,2018-05-23,2
+"Architectural understanding of systems (ClearCore, CCR & Mendix)",IDB-101,Task,Done,2018-05-17,2018-05-21,2018-07-27,2018-05-21,2

@@ -1,0 +1,5 @@
+@TODO - in progress
+
+bh_data.json also includes data items
+would be better to separate these from the (standard) geojson format into a separate file
+

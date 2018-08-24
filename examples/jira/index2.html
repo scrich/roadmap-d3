@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Jira visualisations</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+        <style>
+            .axis path, 
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+            body {background: #eee;}
+
+            svg {background: white;}
+
+            p {padding: 5px;}
+
+            .Discovery {
+                background: #912b88;
+                color:white;
+            }
+            .Alpha {background: #d53880;}
+            .Beta {background: #f47738;}
+            .Live {background: #85994b;}
+            .Retire {background: #bfc1c3;}
+
+        </style>
+    </head>
+    <body>
+    <h1>Jira visualisers</h1>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go 
+            var w = 800;
+            var h = 350;
+            var chartPadding = 30; // better rename this padding - it's being used for the collisions
+
+            // let's have some timey data
+
+//@DONE make the dataset a proper object with properties
+
+
+/**
+ Field changes
+ "story points" becomes size
+ status loses a capital
+*/
+            var dataset = 
+            [
+ {
+   "Summary": "reconfigure LOCTA processing in Clearcore",
+   "Issue key": "IDB-300",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-25",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Discover how the LOCTA processing in Clearcore should be set up",
+   "Issue key": "IDB-299",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-25",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "Business Rule: Indicate excessive internal temperature for a prolonged period (unusually high temperatures (> 27Â°C))",
+   "Issue key": "IDB-297",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-25",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 13
+ },
+ {
+   "Summary": "Business Rule: Indicate early warning signs of fuel poverty (unusually low temperatures (< 18Â°C))",
+   "Issue key": "IDB-284",
+   "Issue Type": "New Feature",
+   "status": "ToDo",
+   "date": "2018-07-18",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Identify the external temperature sensor to develop a relative temperature business rule",
+   "Issue key": "IDB-277",
+   "Issue Type": "Task",
+   "status": "Development",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 2
+ },
+ {
+   "Summary": "Discover how to retrieve flat numbers via the Synetica API to identify properties",
+   "Issue key": "IDB-276",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Access to the Boomi Atom and Molecule from the outside world",
+   "Issue key": "IDB-274",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "SSO for the Boomi Platform",
+   "Issue key": "IDB-272",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-18",
+   "Updated": "2018-07-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-26",
+   "size": 8
+ },
+ {
+   "Summary": "PR002: Within Mendix, the API is not returning any context as to the error",
+   "Issue key": "IDB-271",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-07-17",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 2
+ },
+ {
+   "Summary": "SP002: Create a Logger DB in LIVE",
+   "Issue key": "IDB-268",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 3
+ },
+ {
+   "Summary": "CCR LIVE to include UPRN's",
+   "Issue key": "IDB-267",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 1
+ },
+ {
+   "Summary": "PR002: Post Release",
+   "Issue key": "IDB-266",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 5
+ },
+ {
+   "Summary": "PR002: CAB Approval - Update records",
+   "Issue key": "IDB-265",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 1
+ },
+ {
+   "Summary": "PR002: CAB Approval - Release",
+   "Issue key": "IDB-264",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 1
+ },
+ {
+   "Summary": "PR002: CAB Approval - Communications",
+   "Issue key": "IDB-263",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-19",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-19",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: CAB Approval - Operational Setup",
+   "Issue key": "IDB-262",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 5
+ },
+ {
+   "Summary": "PR002: CAB Approval - Testing",
+   "Issue key": "IDB-261",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-18",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: CAB Approval - Readiness steps",
+   "Issue key": "IDB-260",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-18",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: CAB Approval - Information Governance Review",
+   "Issue key": "IDB-259",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 3
+ },
+ {
+   "Summary": "SP002: DPIA for the Logger",
+   "Issue key": "IDB-258",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Agree with IG for access to the Customer Index.",
+   "Issue key": "IDB-256",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-20",
+   "size": 8
+ },
+ {
+   "Summary": "Obtain DPIA for Council Tax and Benefits",
+   "Issue key": "IDB-255",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-24",
+   "size": 5
+ },
+ {
+   "Summary": "Obtain DPIA for Achieve",
+   "Issue key": "IDB-254",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-24",
+   "size": 5
+ },
+ {
+   "Summary": "SQL Demonstration of Customer Index ",
+   "Issue key": "IDB-253",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-20",
+   "size": 1
+ },
+ {
+   "Summary": "Connect to Synetica API on Boomi Atom using RESTLet",
+   "Issue key": "IDB-252",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-10",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: Create a DPIA",
+   "Issue key": "IDB-251",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-10",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "PR001: Create a DPIA",
+   "Issue key": "IDB-250",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-10",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Determine if viable to keep Achieve as a ClearCore data feed",
+   "Issue key": "IDB-245",
+   "Issue Type": "New Feature",
+   "status": "Deploy",
+   "date": "2018-07-05",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-23",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "PR001: Re-schedule the process to run post ClearCore production ",
+   "Issue key": "IDB-244",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-29",
+   "Updated": "2018-07-02",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-02",
+   "size": 0.5
+ },
+ {
+   "Summary": "Re-schedule ClearCore to run inline with delivery of REC302 files",
+   "Issue key": "IDB-243",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-29",
+   "Updated": "2018-07-03",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-03",
+   "size": 0.5
+ },
+ {
+   "Summary": "PR002: Create a Mendix Front End for CCR Demo",
+   "Issue key": "IDB-241",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-29",
+   "size": 5
+ },
+ {
+   "Summary": "PR001: Devise a convincing front-end demonstration ",
+   "Issue key": "IDB-240",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-19",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-19",
+   "size": 13
+ },
+ {
+   "Summary": "Connect to Synetica API in Test",
+   "Issue key": "IDB-235",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-06-29",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-28",
+   "size": 8
+ },
+ {
+   "Summary": "Connect to iCasework API in Test",
+   "Issue key": "IDB-230",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-26",
+   "Last Viewed": "2018-07-23",
+   "Resolved": "2018-07-26",
+   "size": 8
+ },
+ {
+   "Summary": "API Publishing Procedure",
+   "Issue key": "IDB-229",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 2
+ },
+ {
+   "Summary": "Amend stored procedure to return if a response for attempted duplicate insert",
+   "Issue key": "IDB-228",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-06",
+   "size": 2
+ },
+ {
+   "Summary": "PR001: CAB Approval - CAB [Standard Change]",
+   "Issue key": "IDB-227",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "PR001: CAB Approval - TPAW [Standard Change]",
+   "Issue key": "IDB-226",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-12",
+   "size": 3
+ },
+ {
+   "Summary": "PR001: CAB Approval - IG [Standard Change]",
+   "Issue key": "IDB-225",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-10",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-10",
+   "size": 13
+ },
+ {
+   "Summary": "PR001: E-mail CCR address changes to business customer.",
+   "Issue key": "IDB-221",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-03",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-03",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: Carryout code review for process",
+   "Issue key": "IDB-218",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-18",
+   "Resolved": "2018-07-06",
+   "size": 8
+ },
+ {
+   "Summary": "SP002: Automatic method to restore process default log level after using exceptional log levels such as WARNING",
+   "Issue key": "IDB-212",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-06-22",
+   "Updated": "2018-07-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-06",
+   "size": 2
+ },
+ {
+   "Summary": "PR002: Carry out UAT of the CCR update address API to ensure it meets the needs of the business.",
+   "Issue key": "IDB-206",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-21",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 5
+ },
+ {
+   "Summary": "PR001: Carry out UAT of the CCR update process to ensure it meets the needs of the business.",
+   "Issue key": "IDB-205",
+   "Issue Type": "Task",
+   "status": "Test",
+   "date": "2018-06-21",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Create documentation for ClearCore",
+   "Issue key": "IDB-200",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-19",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-21",
+   "size": 5
+ },
+ {
+   "Summary": "Create a Mendix front-end application ready to consume CCR Update Address API",
+   "Issue key": "IDB-199",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-15",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-19",
+   "size": 3
+ },
+ {
+   "Summary": "Connect to the Synetica API in the Boomi Platform to retrieve sensor data.",
+   "Issue key": "IDB-188",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-06-13",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Obtain DPIA for datasets connected to ClearCore",
+   "Issue key": "IDB-181",
+   "Issue Type": "Task",
+   "status": "Development",
+   "date": "2018-06-11",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "Analysis: iWorld to ClearCore automation task",
+   "Issue key": "IDB-178",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-26",
+   "size": 8
+ },
+ {
+   "Summary": "iWorld API Understanding",
+   "Issue key": "IDB-177",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-06-11",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "As a JID, I need an Introduction to Mendix to understand how it consumes API's.",
+   "Issue key": "IDB-175",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 3
+ },
+ {
+   "Summary": "As a developer, I need an API to allow my applications (e.g. Mendix) to publish address changes to CCR.",
+   "Issue key": "IDB-173",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 8
+ },
+ {
+   "Summary": "PR001: External Code Review: Dell to Code Review",
+   "Issue key": "IDB-172",
+   "Issue Type": "Task",
+   "status": "Test",
+   "date": "2018-06-11",
+   "Updated": "2018-07-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 1
+ },
+ {
+   "Summary": "Code Review: logging process [SP002]",
+   "Issue key": "IDB-171",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-08",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 8
+ },
+ {
+   "Summary": "Logger training session and documentation",
+   "Issue key": "IDB-169",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-08",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 3
+ },
+ {
+   "Summary": "Organise a ClearCore consultancy day to understand ClearCore",
+   "Issue key": "IDB-167",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-15",
+   "size": 3
+ },
+ {
+   "Summary": "Improve the logger process [SP002] to collect metrics",
+   "Issue key": "IDB-165",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-18",
+   "size": 3
+ },
+ {
+   "Summary": "Create a iPaaS template process to be used for all new processes",
+   "Issue key": "IDB-164",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-18",
+   "size": 1
+ },
+ {
+   "Summary": "Formulate a formal liaison process with RBTECH ",
+   "Issue key": "IDB-163",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-21",
+   "size": 3
+ },
+ {
+   "Summary": "As a data solutions team member, I need the REC302 data from iWorld to be automatically dropped daily into ClearCore for processing.",
+   "Issue key": "IDB-162",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-29",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-29",
+   "size": 3
+ },
+ {
+   "Summary": "Compile and order candidate data sources for Clearcore",
+   "Issue key": "IDB-159",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 8
+ },
+ {
+   "Summary": "[Data Source Automation - template]",
+   "Issue key": "IDB-147",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 10
+ },
+ {
+   "Summary": "My Account ID Verification",
+   "Issue key": "IDB-146",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Investigate a number of different and unrelated items",
+   "Issue key": "IDB-144",
+   "Issue Type": "Epic",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 10
+ },
+ {
+   "Summary": "Processing Advice for Anonymising ",
+   "Issue key": "IDB-143",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-06",
+   "size": 2
+ },
+ {
+   "Summary": "Boomi Naming Convention",
+   "Issue key": "IDB-141",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 2
+ },
+ {
+   "Summary": "Formalise the 'Commit' Process for Boomi Processes",
+   "Issue key": "IDB-140",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-08",
+   "size": 2
+ },
+ {
+   "Summary": "House Keeping on Boomi Platform",
+   "Issue key": "IDB-139",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-08",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-08",
+   "size": 1
+ },
+ {
+   "Summary": "Code Review Process",
+   "Issue key": "IDB-138",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-30",
+   "size": 5
+ },
+ {
+   "Summary": "Define and run functional test cases",
+   "Issue key": "IDB-137",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-06",
+   "size": 5
+ },
+ {
+   "Summary": "Permanent Boomi DIR for INPUT, OUT and LOGGING ",
+   "Issue key": "IDB-134",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 1
+ },
+ {
+   "Summary": "Investigation of Atmosphere function for identifying duplicated records",
+   "Issue key": "IDB-132",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-30",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-30",
+   "size": 2
+ },
+ {
+   "Summary": "Confirm the Usability of Test Data",
+   "Issue key": "IDB-131",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "Test / Production ClearCore Mismatch",
+   "Issue key": "IDB-130",
+   "Issue Type": "Impediment",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 0
+ },
+ {
+   "Summary": "Rebuild Test ClearCore Environment",
+   "Issue key": "IDB-129",
+   "Issue Type": "Impediment",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-04",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 0
+ },
+ {
+   "Summary": "Code Cleanup",
+   "Issue key": "IDB-127",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 3
+ },
+ {
+   "Summary": "Integration Connection Test",
+   "Issue key": "IDB-125",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "ClearCore Output Process Change",
+   "Issue key": "IDB-123",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-06-05",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-05",
+   "size": 0.5
+ },
+ {
+   "Summary": "ClearCore Output File Location - DEV",
+   "Issue key": "IDB-122",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 2
+ },
+ {
+   "Summary": "Error Cases",
+   "Issue key": "IDB-121",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "Validation: Feed CCR Address changes into ClearCore",
+   "Issue key": "IDB-119",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 1
+ },
+ {
+   "Summary": "Match the expected address with the actual address changes in the DELTA",
+   "Issue key": "IDB-118",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 0.5
+ },
+ {
+   "Summary": "Keep a history of address changes in CCR",
+   "Issue key": "IDB-117",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 0
+ },
+ {
+   "Summary": "Call the CCR 'update address' stored procedure",
+   "Issue key": "IDB-116",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 1
+ },
+ {
+   "Summary": "Test and refine the Boomi Process",
+   "Issue key": "IDB-115",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 13
+ },
+ {
+   "Summary": "Build the Boomi Process.",
+   "Issue key": "IDB-114",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 8
+ },
+ {
+   "Summary": "Breakdown and plan for Boomi process.",
+   "Issue key": "IDB-113",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 5
+ },
+ {
+   "Summary": "Formalise address format in CCR database - UPRN etc. Add UPRN's to CCR address database match and insert.",
+   "Issue key": "IDB-111",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-18",
+   "size": 5
+ },
+ {
+   "Summary": "Analyse exsititing CCR client address quality in TEST. Match address with UPRN to LLPG.",
+   "Issue key": "IDB-110",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-18",
+   "size": 5
+ },
+ {
+   "Summary": "Create test data.",
+   "Issue key": "IDB-106",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 8
+ },
+ {
+   "Summary": "Gather and collate baseline metrics",
+   "Issue key": "IDB-105",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-19",
+   "size": 8
+ },
+ {
+   "Summary": "Understand ClearCore 'Poll for change' report.",
+   "Issue key": "IDB-104",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 2
+ },
+ {
+   "Summary": "Pickup changes from ClearCore - consume ClearCore CSV or SQL.",
+   "Issue key": "IDB-103",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-22",
+   "size": 2
+ },
+ {
+   "Summary": "Understand business processes for CCR",
+   "Issue key": "IDB-102",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-17",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 2
+ },
+ {
+   "Summary": "Architectural understanding of systems (ClearCore, CCR & Mendix)",
+   "Issue key": "IDB-101",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-17",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 2
+ }
+ 
+];
+            
+/*
+                            {
+                                date: "2016-06-03",
+                                size: 200, 
+                                status: "Beta"
+                            },
+                            */
+
+            // define colors
+            var colDiscovery = "#912b88";
+            var colAlpha = "#d53880";
+            var colBeta = "#f47738";
+            var colLive = "#85994b";
+            var colRetire = "#bfc1c3";
+            // need some more for Jira
+            var colDone = "#85994b";
+            var colToDo = "#e20f41";
+            var colDevelopment = "#912b88";
+            var colDeploy = "#912b88";
+            var colTest = "#d7f442";
+
+            function setColor(pColor) {
+                return "col"+pColor;
+            }
+
+            // define scales
+
+            var xScale = d3.scale.linear()
+                .domain([0, 500])     // input range
+                .range([50, (w* 0.8)]);      // output range
+
+            var yScale = d3.scale.linear()
+                .domain ([0,400])
+                .range ([(h*.8), 50]);
+
+// @TODO make the scales dynamic from the min and max dates in the dataset
+
+            var tScale = d3.time.scale()
+                .domain([new Date("2018-04-01"), new Date("2018-08-01")])
+                .range([50, 750]);
+
+// change rScale for story points, domain 0,20 not 0,400
+// range 1,10, so we don't get any circle with zero size
+
+            var rScale = d3.scale.linear()
+                .domain([0,20])
+                .range([1, 30]);
+            
+            // define axes    
+
+            var tAxis = d3.svg.axis()
+                .scale(tScale)
+                .orient("bottom")
+                .ticks(d3.time.month, 3)   // 3 month intervals
+                .tickFormat(d3.time.format("%b %y"));
+
+            var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom")
+                .ticks(5);
+
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
+
+            // make the svg element
+
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+            // create a clipping path
+            svg.append("clipPath")
+                .attr("id", "chart-area")
+                .append("rect")
+                .attr("x", chartPadding)
+                .attr("y", chartPadding)
+                .attr("width", w - chartPadding * 3)
+                .attr("height", h - chartPadding * 2);
+
+//@TODO make the y dimension ordinal
+//      either grouped by an attribute of the data
+//      or clustered together in a single line
+
+//@TODO make it so you can see data attributes when you click or hover 
+//      on the circle
+/*
+            // create the data points
+            svg.append("g")
+            .attr("id", "circles")
+            .attr("clip-path", "url(#chart-area)")
+            .selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d){
+                
+                return tScale(new Date(d.date));
+                console.log (new Date(d.date));
+            })
+            //.attr("cy", function(d){return yScale(d[1]);})
+            .attr("cy", 100)
+            .attr("r", function(d){
+                return rScale(d.size);
+            })
+            .attr("fill", function(d){
+                return eval(setColor(d.status));
+            });
+*/
+// Put the dataset into nodes
+
+// input: 
+//      dataset
+
+// output:
+//      radius
+//      color
+//      cx
+//      cy
+
+
+
+var nodes = dataset.map(function(d){
+    return {
+        radius: rScale(d.size),
+        color: eval(setColor(d.status)),
+        cx: tScale(new Date(d.date)),
+        cy: h/2
+    };
+});
+
+
+
+/*            var nodes = d3.range(n).map(function() {
+  var i = Math.floor(Math.random() * m),
+      v = (i + 1) / m * -Math.log(Math.random());
+  return {
+    radius: Math.sqrt(v) * maxRadius,
+    color: color(i),
+    cx: x(i),
+    cy: height / 2
+  };
+});
+*/
+
+            // draw the axes
+            /*svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h-(padding*3)) + ")")
+                .call(xAxis);
+*/
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h-chartPadding) + ")")
+                .call(tAxis);
+/*
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(50,0)")
+                .call(yAxis);
+*/
+
+//try adding from multi-foci here
+
+// bung in some spurious vars to keep it happy
+
+var width = 900;
+var height = 500;
+var maxRadius = 6; // not sure what effect this has
+var padding = 6 //separation between nodes
+
+// end of sprurious vars
+
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width, height])
+    .gravity(0)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+/*
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+*/
+var circle = svg.selectAll("circle")
+    .data(nodes)
+  .enter().append("circle")
+    .attr("r", function(d) { return d.radius; })
+    .style("fill", function(d) { return d.color; })
+    .call(force.drag);
+
+function tick(e) {
+  circle
+      .each(gravity(.2 * e.alpha))
+      .each(collide(.5))
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (d.cy - d.y) * alpha;
+    d.x += (d.cx - d.x) * alpha;
+  };
+}
+
+// Resolve collisions between nodes.
+// maxRadious and padding are constants - can we get these dynamically from the boject?
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+ //   var r = d.radius + maxRadius + padding,
+    var r = d.radius + maxRadius + padding,
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y)//,
+//            r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+            //r = d.radius + quad.point.radius+ (d.color !==quad.point.color) * padding;
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}
+
+
+
+
+        </script>
+
+       <p class= "Discovery">Discovery</p> 
+       <p class="Alpha">Alpha</p>
+       <p class="Beta">Beta</p>
+       <p class="Live">Live</p>
+       <p class="Retire">Retire</p>
+    </body>
+</html>

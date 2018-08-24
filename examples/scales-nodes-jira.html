@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3v3/d3.v3.js"></script>
+        <style>
+            .axis path, 
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+            body {background: #eee;}
+
+            svg {background: white;}
+
+            p {padding: 5px;}
+
+            .Discovery {
+                background: #912b88;
+                color:white;
+            }
+            .Alpha {background: #d53880;}
+            .Beta {background: #f47738;}
+            .Live {background: #85994b;}
+            .Retire {background: #bfc1c3;}
+
+        </style>
+    </head>
+    <body>
+    <h1>Yer actual roadmap visualiser</h1>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go 
+            var w = 800;
+            var h = 350;
+            var chartPadding = 30; // better rename this padding - it's being used for the collisions
+
+            // let's have some timey data
+
+//@DONE make the dataset a proper object with properties
+
+
+/**
+ Field changes
+ "story points" becomes size
+ status loses a capital
+*/
+            var dataset = 
+            [
+ {
+   "Summary": "Generic summary IDB-300",
+   "Issue key": "IDB-300",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-25",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-299",
+   "Issue key": "IDB-299",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-25",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-297",
+   "Issue key": "IDB-297",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-25",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 13
+ },
+ {
+   "Summary": "Generic summary IDB-284",
+   "Issue key": "IDB-284",
+   "Issue Type": "New Feature",
+   "status": "ToDo",
+   "date": "2018-07-18",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-277",
+   "Issue key": "IDB-277",
+   "Issue Type": "Task",
+   "status": "Development",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-276",
+   "Issue key": "IDB-276",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-274",
+   "Issue key": "IDB-274",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-18",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-272",
+   "Issue key": "IDB-272",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-18",
+   "Updated": "2018-07-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-26",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-271",
+   "Issue key": "IDB-271",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-07-17",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-268",
+   "Issue key": "IDB-268",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-267",
+   "Issue key": "IDB-267",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-266",
+   "Issue key": "IDB-266",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-265",
+   "Issue key": "IDB-265",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-264",
+   "Issue key": "IDB-264",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-263",
+   "Issue key": "IDB-263",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-19",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-19",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-262",
+   "Issue key": "IDB-262",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-23",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-261",
+   "Issue key": "IDB-261",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-18",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-260",
+   "Issue key": "IDB-260",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-18",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-259",
+   "Issue key": "IDB-259",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-258",
+   "Issue key": "IDB-258",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-256",
+   "Issue key": "IDB-256",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-20",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-255",
+   "Issue key": "IDB-255",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-24",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-254",
+   "Issue key": "IDB-254",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-24",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-24",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-253",
+   "Issue key": "IDB-253",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-11",
+   "Updated": "2018-07-20",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-20",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-252",
+   "Issue key": "IDB-252",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-07-10",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-251",
+   "Issue key": "IDB-251",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-10",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-250",
+   "Issue key": "IDB-250",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-07-10",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-245",
+   "Issue key": "IDB-245",
+   "Issue Type": "New Feature",
+   "status": "Deploy",
+   "date": "2018-07-05",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-23",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-244",
+   "Issue key": "IDB-244",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-29",
+   "Updated": "2018-07-02",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-02",
+   "size": 0.5
+ },
+ {
+   "Summary": "Generic summary IDB-243",
+   "Issue key": "IDB-243",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-29",
+   "Updated": "2018-07-03",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-03",
+   "size": 0.5
+ },
+ {
+   "Summary": "Generic summary IDB-241",
+   "Issue key": "IDB-241",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-29",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-240",
+   "Issue key": "IDB-240",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-19",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-19",
+   "size": 13
+ },
+ {
+   "Summary": "Generic summary IDB-235",
+   "Issue key": "IDB-235",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-06-29",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-28",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-230",
+   "Issue key": "IDB-230",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-27",
+   "Updated": "2018-07-26",
+   "Last Viewed": "2018-07-23",
+   "Resolved": "2018-07-26",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-229",
+   "Issue key": "IDB-229",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-228",
+   "Issue key": "IDB-228",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-06",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-227",
+   "Issue key": "IDB-227",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-13",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-13",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-226",
+   "Issue key": "IDB-226",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-12",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-225",
+   "Issue key": "IDB-225",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-10",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-10",
+   "size": 13
+ },
+ {
+   "Summary": "Generic summary IDB-221",
+   "Issue key": "IDB-221",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-03",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-03",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-218",
+   "Issue key": "IDB-218",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-25",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-18",
+   "Resolved": "2018-07-06",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-212",
+   "Issue key": "IDB-212",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-06-22",
+   "Updated": "2018-07-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-06",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-206",
+   "Issue key": "IDB-206",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-21",
+   "Updated": "2018-07-17",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-07-17",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-205",
+   "Issue key": "IDB-205",
+   "Issue Type": "Task",
+   "status": "Test",
+   "date": "2018-06-21",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-200",
+   "Issue key": "IDB-200",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-19",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-21",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-199",
+   "Issue key": "IDB-199",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-15",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-19",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-188",
+   "Issue key": "IDB-188",
+   "Issue Type": "Task",
+   "status": "Discovery",
+   "date": "2018-06-13",
+   "Updated": "2018-07-27",
+   "Last Viewed": "2018-07-25",
+   "Resolved": "",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-181",
+   "Issue key": "IDB-181",
+   "Issue Type": "Task",
+   "status": "Development",
+   "date": "2018-06-11",
+   "Updated": "2018-07-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-178",
+   "Issue key": "IDB-178",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-26",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-177",
+   "Issue key": "IDB-177",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-06-11",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-175",
+   "Issue key": "IDB-175",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-173",
+   "Issue key": "IDB-173",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-11",
+   "Updated": "2018-07-12",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-172",
+   "Issue key": "IDB-172",
+   "Issue Type": "Task",
+   "status": "Test",
+   "date": "2018-06-11",
+   "Updated": "2018-07-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-171",
+   "Issue key": "IDB-171",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-08",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-169",
+   "Issue key": "IDB-169",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-08",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-167",
+   "Issue key": "IDB-167",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-15",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-165",
+   "Issue key": "IDB-165",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-18",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-164",
+   "Issue key": "IDB-164",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-18",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-163",
+   "Issue key": "IDB-163",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-21",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-162",
+   "Issue key": "IDB-162",
+   "Issue Type": "Story",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-29",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-29",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-159",
+   "Issue key": "IDB-159",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-06-07",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-147",
+   "Issue key": "IDB-147",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 10
+ },
+ {
+   "Summary": "Generic summary IDB-146",
+   "Issue key": "IDB-146",
+   "Issue Type": "Task",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-144",
+   "Issue key": "IDB-144",
+   "Issue Type": "Epic",
+   "status": "ToDo",
+   "date": "2018-05-24",
+   "Updated": "2018-06-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "",
+   "size": 10
+ },
+ {
+   "Summary": "Generic summary IDB-143",
+   "Issue key": "IDB-143",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-06",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-141",
+   "Issue key": "IDB-141",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-140",
+   "Issue key": "IDB-140",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-08",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-139",
+   "Issue key": "IDB-139",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-08",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-08",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-138",
+   "Issue key": "IDB-138",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-30",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-137",
+   "Issue key": "IDB-137",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-06",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-06",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-134",
+   "Issue key": "IDB-134",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-132",
+   "Issue key": "IDB-132",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-30",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-30",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-131",
+   "Issue key": "IDB-131",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-130",
+   "Issue key": "IDB-130",
+   "Issue Type": "Impediment",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 0
+ },
+ {
+   "Summary": "Generic summary IDB-129",
+   "Issue key": "IDB-129",
+   "Issue Type": "Impediment",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-04",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 0
+ },
+ {
+   "Summary": "Generic summary IDB-127",
+   "Issue key": "IDB-127",
+   "Issue Type": "Improvement",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 3
+ },
+ {
+   "Summary": "Generic summary IDB-125",
+   "Issue key": "IDB-125",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-24",
+   "Updated": "2018-06-07",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-123",
+   "Issue key": "IDB-123",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-06-05",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-05",
+   "size": 0.5
+ },
+ {
+   "Summary": "Generic summary IDB-122",
+   "Issue key": "IDB-122",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-05-31",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-31",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-121",
+   "Issue key": "IDB-121",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-22",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-119",
+   "Issue key": "IDB-119",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-25",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-25",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-118",
+   "Issue key": "IDB-118",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-22",
+   "size": 0.5
+ },
+ {
+   "Summary": "Generic summary IDB-117",
+   "Issue key": "IDB-117",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 0
+ },
+ {
+   "Summary": "Generic summary IDB-116",
+   "Issue key": "IDB-116",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 1
+ },
+ {
+   "Summary": "Generic summary IDB-115",
+   "Issue key": "IDB-115",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-07",
+   "size": 13
+ },
+ {
+   "Summary": "Generic summary IDB-114",
+   "Issue key": "IDB-114",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-113",
+   "Issue key": "IDB-113",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-111",
+   "Issue key": "IDB-111",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-18",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-110",
+   "Issue key": "IDB-110",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-18",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-18",
+   "size": 5
+ },
+ {
+   "Summary": "Generic summary IDB-106",
+   "Issue key": "IDB-106",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-105",
+   "Issue key": "IDB-105",
+   "Issue Type": "New Feature",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-06-26",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-06-19",
+   "size": 8
+ },
+ {
+   "Summary": "Generic summary IDB-104",
+   "Issue key": "IDB-104",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-103",
+   "Issue key": "IDB-103",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-18",
+   "Updated": "2018-05-22",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-22",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-102",
+   "Issue key": "IDB-102",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-17",
+   "Updated": "2018-05-23",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-23",
+   "size": 2
+ },
+ {
+   "Summary": "Generic summary IDB-101",
+   "Issue key": "IDB-101",
+   "Issue Type": "Task",
+   "status": "Done",
+   "date": "2018-05-17",
+   "Updated": "2018-05-21",
+   "Last Viewed": "2018-07-27",
+   "Resolved": "2018-05-21",
+   "size": 2
+ }
+ 
+];
+            
+/*
+                            {
+                                date: "2016-06-03",
+                                size: 200, 
+                                status: "Beta"
+                            },
+                            */
+
+            // define colors
+            var colDiscovery = "#912b88";
+            var colAlpha = "#d53880";
+            var colBeta = "#f47738";
+            var colLive = "#85994b";
+            var colRetire = "#bfc1c3";
+            // need some more for Jira
+            var colDone = "#85994b";
+            var colToDo = "#e20f41";
+            var colDevelopment = "#912b88";
+            var colDeploy = "#912b88";
+            var colTest = "#d7f442";
+
+            function setColor(pColor) {
+                return "col"+pColor;
+            }
+
+            // define scales
+
+            var xScale = d3.scale.linear()
+                .domain([0, 500])     // input range
+                .range([50, (w* 0.8)]);      // output range
+
+            var yScale = d3.scale.linear()
+                .domain ([0,400])
+                .range ([(h*.8), 50]);
+
+// @TODO make the scales dynamic from the min and max dates in the dataset
+
+            var tScale = d3.time.scale()
+                .domain([new Date("2018-04-01"), new Date("2018-08-01")])
+                .range([50, 750]);
+
+// change rScale for story points, domain 0,20 not 0,400
+// range 1,10, so we don't get any circle with zero size
+
+            var rScale = d3.scale.linear()
+                .domain([0,20])
+                .range([1, 30]);
+            
+            // define axes    
+
+            var tAxis = d3.svg.axis()
+                .scale(tScale)
+                .orient("bottom")
+                .ticks(d3.time.month, 3)   // 3 month intervals
+                .tickFormat(d3.time.format("%b %y"));
+
+            var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom")
+                .ticks(5);
+
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
+
+            // make the svg element
+
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+            // create a clipping path
+            svg.append("clipPath")
+                .attr("id", "chart-area")
+                .append("rect")
+                .attr("x", chartPadding)
+                .attr("y", chartPadding)
+                .attr("width", w - chartPadding * 3)
+                .attr("height", h - chartPadding * 2);
+
+//@TODO make the y dimension ordinal
+//      either grouped by an attribute of the data
+//      or clustered together in a single line
+
+//@TODO make it so you can see data attributes when you click or hover 
+//      on the circle
+/*
+            // create the data points
+            svg.append("g")
+            .attr("id", "circles")
+            .attr("clip-path", "url(#chart-area)")
+            .selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d){
+                
+                return tScale(new Date(d.date));
+                console.log (new Date(d.date));
+            })
+            //.attr("cy", function(d){return yScale(d[1]);})
+            .attr("cy", 100)
+            .attr("r", function(d){
+                return rScale(d.size);
+            })
+            .attr("fill", function(d){
+                return eval(setColor(d.status));
+            });
+*/
+// Put the dataset into nodes
+
+// input: 
+//      dataset
+
+// output:
+//      radius
+//      color
+//      cx
+//      cy
+
+
+
+var nodes = dataset.map(function(d){
+    return {
+        radius: rScale(d.size),
+        color: eval(setColor(d.status)),
+        cx: tScale(new Date(d.date)),
+        cy: h/2
+    };
+});
+
+
+
+/*            var nodes = d3.range(n).map(function() {
+  var i = Math.floor(Math.random() * m),
+      v = (i + 1) / m * -Math.log(Math.random());
+  return {
+    radius: Math.sqrt(v) * maxRadius,
+    color: color(i),
+    cx: x(i),
+    cy: height / 2
+  };
+});
+*/
+
+            // draw the axes
+            /*svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h-(padding*3)) + ")")
+                .call(xAxis);
+*/
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h-chartPadding) + ")")
+                .call(tAxis);
+/*
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(50,0)")
+                .call(yAxis);
+*/
+
+//try adding from multi-foci here
+
+// bung in some spurious vars to keep it happy
+
+var width = 900;
+var height = 500;
+var maxRadius = 6; // not sure what effect this has
+var padding = 6 //separation between nodes
+
+// end of sprurious vars
+
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width, height])
+    .gravity(0)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+/*
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+*/
+var circle = svg.selectAll("circle")
+    .data(nodes)
+  .enter().append("circle")
+    .attr("r", function(d) { return d.radius; })
+    .style("fill", function(d) { return d.color; })
+    .call(force.drag);
+
+function tick(e) {
+  circle
+      .each(gravity(.2 * e.alpha))
+      .each(collide(.5))
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (d.cy - d.y) * alpha;
+    d.x += (d.cx - d.x) * alpha;
+  };
+}
+
+// Resolve collisions between nodes.
+// maxRadious and padding are constants - can we get these dynamically from the boject?
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+ //   var r = d.radius + maxRadius + padding,
+    var r = d.radius + maxRadius + padding,
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y)//,
+//            r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+            //r = d.radius + quad.point.radius+ (d.color !==quad.point.color) * padding;
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}
+
+
+
+
+        </script>
+
+       <p class= "Discovery">Discovery</p> 
+       <p class="Alpha">Alpha</p>
+       <p class="Beta">Beta</p>
+       <p class="Live">Live</p>
+       <p class="Retire">Retire</p>
+    </body>
+</html>

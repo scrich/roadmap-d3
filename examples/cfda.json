@@ -1,0 +1,238 @@
+{
+  "name": "cfda",
+  "children": [
+    {
+      "name": "My Account",
+      "children": [
+        {
+          "name": "Report/Request",
+          "children": [
+            {
+              "name": "Missed Collection",
+              "size": "1234"
+            },
+            {
+              "name": "Bin and Box",
+              "size": 3938
+            }
+          ]
+        },
+        {
+          "name": "Pay",
+          "children": [
+            {
+              "name": "Planning pre-app",
+              "size": "1234"
+            },
+            {
+              "name": "Garden Waste",
+              "size": 3938
+            }
+          ]
+        },
+        {
+          "name": "Apply",
+          "children": [
+            {
+              "name": "Parking",
+              "size": "1234"
+            },
+            {
+              "name": "Concessionary Travel",
+              "size": 3938
+            }
+          ]
+        },
+        {
+          "name": "Register",
+          "children": [
+            {
+              "name": "Marketing prefs",
+              "size": 3416
+            },
+            {
+              "name": "Validation",
+              "size": 3416
+            }
+          ]
+        },
+        {
+          "name": "View your account",
+          "children": [
+            {
+              "name": "Council Tax",
+              "size": 7074
+            },
+            {
+              "name": "Housing",
+              "size": 7074
+            }
+          ]
+        },
+        {
+          "name": "Update info",
+          "children": [
+            {
+              "name": "Housing benefit",
+              "size": 100
+            }
+          ]
+        },
+        {
+          "name": "Staff forms",
+          "children": [
+            {
+              "name": "Housing",
+              "size": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mobile Working",
+      "children": [
+        {
+          "name": "Platform",
+          "size": 17010
+        },
+        {
+          "name": "Apps",
+          "size": 5842
+        },
+        {
+          "name": "Data flow",
+          "children": [
+            {
+              "name": "RAD environment",
+              "size": 2042
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Assessments",
+      "children": [
+        {
+          "name": "Lots to do here",
+          "size": 3000
+        }
+      ]
+    },
+    {
+      "name": "Community",
+      "children": [
+        {
+          "name": "Grants",
+          "size": 1082
+        },
+        {
+          "name": "Volunteering",
+          "size": 1336
+        },
+        {
+          "name": "Neighbourhood management",
+          "size": 1082
+        },
+        {
+          "name": "Sharing economy",
+          "size": 1082
+        }
+      ]
+    },
+    {
+      "name": "City Intelligence",
+      "children": [
+        {
+          "name": "Customer Index",
+          "children": [
+            {
+              "name": "Data sources",
+              "size": 721
+            },
+            {
+              "name": "Feedback loops",
+              "size": 4294
+            },
+            {
+              "name": "Interfaces",
+              "size": 9800
+            }
+          ]
+        },
+        {
+          "name": "Mind of the City",
+          "size": 1759
+        },
+        {
+          "name": "DataSchema",
+          "size": 2165
+        },
+        {
+          "name": "DataSet",
+          "size": 586
+        },
+        {
+          "name": "DataSource",
+          "size": 3331
+        }
+      ]
+    },
+    {
+      "name": "ECM",
+      "children": [
+        {
+          "name": "Taxonomy",
+          "size": 8833
+        },
+        {
+          "name": "Platform",
+          "size": 1732
+        },
+        {
+          "name": "Approach",
+          "size": 3623
+        }
+      ]
+    },
+    {
+      "name": "Digital Leadership",
+      "children": [
+        {
+          "name": "Councillors",
+          "size": 8833
+        },
+        {
+          "name": "Democracy",
+          "size": 1732
+        },
+        {
+          "name": "Staff",
+          "size": 3623
+        }
+      ]
+    },
+    {
+      "name": "Resilience",
+      "children": [
+        {
+          "name": "BHCC",
+          "size": 200
+        },
+        {
+          "name": "Gwynedd",
+          "size": 100
+        },
+        {
+          "name": "Highlands",
+          "size": 100
+        },
+        {
+          "name": "Plymouth",
+          "size": 100
+        }
+      ]
+    }
+  ]
+}

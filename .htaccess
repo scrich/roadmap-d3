@@ -1,0 +1,17 @@
+Options +Indexes 
+
+IndexOptions +FancyIndexing +DescriptionWidth=* +HTMLTable +XHTML
+
+AddDescription "A Sankey example with movable oblongs and dependencies" sankey.html
+AddDescription "Customer Index examples" ci
+AddDescription "The d3 v3 library" d3
+AddDescription "mapping examples" topojson
+AddDescription "Just a few ideas" examples
+AddDescription "json data file" *.json
+AddDescription "demo changing size dimension" sunburst.html
+AddDescription "dynamic scale redraw" 19_axes_dynamic.html
+AddDescription "interaction add remove data points" 29_dynamic_labels.html
+AddDescription "self positioning best fit timeline" scales-nodes.html
+AddDescription "nothing to see here" static_time_scale.html
+
+IndexIgnore .git

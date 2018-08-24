@@ -1,0 +1,472 @@
+﻿Summary,Issue key,Issue id,Parent id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project description,Project url,Priority,Resolution,Assignee,Reporter,Creator,Created,Updated,Last Viewed,Resolved,Fix Version/s,Component/s,Due Date,Votes,Labels,Labels,Labels,Description,Environment,Watchers,Watchers,Watchers,Watchers,Watchers,Log Work,Original Estimate,Remaining Estimate,Time Spent,Work Ratio,Î£ Original Estimate,Î£ Remaining Estimate,Î£ Time Spent,Security Level,Outward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Cloners),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Issue split),Outward issue link (Relates),Outward issue link (Relates),Attachment,Custom field (Account),Custom field (Business Value),Custom field (Cost Code),Custom field (Epic Colour),Custom field (Epic Link),Custom field (Epic Name),Custom field (Epic Status),Custom field (Firmstep Status),Custom field (Firmstep Ticket Number),Custom field (Firmstep Ticket URL),Custom field (Flagged),Custom field (Internal Client:),Custom field (Marval Reference:),Custom field (Mendix modeler version),Custom field (Mendix module),Custom field (Product),Custom field (Rank),Custom field (Requester Name),Custom field (Savings),Custom field (Service Catalogue Description),Custom field (Service Catalogue Name),Custom field (Services),Custom field (Sharepoint URL),Sprint,Sprint,Sprint,Sprint,Custom field (Story Points),Custom field (Ticket Raised),Custom field (url)
+reconfigure LOCTA processing in Clearcore,IDB-300,34059,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,RichardAClarke,RichardAClarke,2018-07-25,2018-07-25,2018-07-25,,ClearCore Data Processing - V1.0,,,0,development,,,"Reconfigure, possibly linking to LLPG, to correctly process customer's residential property address, not contact address or the address they own as a landlord
+
+AC
+see IDB-299
+* Council Tax property changes in Northgate are seen in the Clearcore output used by iPaaS",,RichardAClarke,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-158,,,,,,,,,,,,0|hzzzqe:oxu,,,,,,,6. IoT Business Rules & CC I/O,,,,8,,
+Discover how the LOCTA processing in Clearcore should be set up,IDB-299,34058,,Task,Discovery,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,richardbeech,RichardAClarke,RichardAClarke,2018-07-25,2018-07-27,2018-07-27,,ClearCore Data Processing - V1.0,,,0,Blocked,Discovery,,"LOCTA processing does not correctly process customers at the address where they reside.
+Need to review the LOCTA file structure to correctly feed Clearcore with the customer's residence.
+
+AC:
+* Understand how Northgate address changes on a property will be processed into Clearcore so that Best View files will deliver the correct residential address to iPaaS
+
+Does not include:
+* reconfiguration in Clearcore",,RichardAClarke,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-158,,,,,,Impediment,,,,,,0|hzzzqe:oxo,,,,,,,6. IoT Business Rules & CC I/O,,,,5,,
+Business Rule: Indicate excessive internal temperature for a prolonged period (unusually high temperatures (> 27Â°C)),IDB-297,34056,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,samwhite,RichardAClarke,2018-07-25,2018-07-25,2018-07-25,,IoT to iCasework - V1.0,,,0,,,,"Where a property is occupied and displays unusually high temperatures (> 27Â°C) over a long period (72 hours) 
+
+Create a rule to indicate.
+
+use parameters in the process to enable reuse for other business rules, eg
+* time period
+* temperature condition (< or >)
+* temperature value
+
+AC:
+* Show all properties where the condition applies
+* This iteration - notification by email shape
+
+Future iteration
+* Provides data to sends a notification
+* Calls a notification subprocess",,RichardAClarke,,,,,,,,,,,,,,,,IDB-284,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:ox8,,,,,,,6. IoT Business Rules & CC I/O,,,,13,,
+Business Rule: Indicate early warning signs of fuel poverty (unusually low temperatures (< 18Â°C)),IDB-284,34031,,New Feature,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,samwhite,samwhite,2018-07-18,2018-07-25,2018-07-25,,IoT to iCasework - V1.0,,,0,,,,"Where a property is occupied and display unusually low temperatures (< 18Â°C) over a long period (72 hours) can be an early warning indicator of fuel poverty.
+
+Create a rule to indicate.
+
+Assume a parameterised rule is already in place DIG-297
+
+AC:
+* we can modify or re-use the earlier temperature business rule",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:oxc,,,,,,,6. IoT Business Rules & CC I/O,,,,3,,
+Identify the external temperature sensor to develop a relative temperature business rule,IDB-277,34024,,Task,Development,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,olivercurson,samwhite,samwhite,2018-07-18,2018-07-27,2018-07-25,,IoT to iCasework - V1.0,,,0,Discovery,,,"Target the external temperature sensor based on location information in the location spreadsheet, or the API
+
+Does include:
+* identify the sensor, ideally by API
+* Connectivity test
+
+Does not include:
+* Read the temperature of the external sensor.
+
+Â AC:
+* successful communication with the external sensor
+
+
+We'll need an architectural overview of this.
+Synetica APIs here:Â S:\ICT\ISU\Web Development\Synetica",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:ox4,,,,,,,6. IoT Business Rules & CC I/O,,,,2,,
+Discover how to retrieve flat numbers via the Synetica API to identify properties,IDB-276,34023,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,samwhite,samwhite,2018-07-18,2018-07-27,2018-07-25,,IoT to iCasework - V1.0,,,0,Discovery,,,"Discover whether we can or can't retrieve and store (CACHE?) a list of the sensors to identify locations (dwellings)
+
+Resources:
+* Spreadsheet of sensor locations provided
+
+Discover whether Display Name can be retrieved by API
+If not, decide whether the spreadsheet data should be stored in a database instead
+
+",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,27/Jul/18 10:01 AM;samwhite;Brighton Zone ID's.xlsx;http://wap-jira:8080/secure/attachment/13000/Brighton+Zone+ID%27s.xlsx,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:ox,,,,,,,6. IoT Business Rules & CC I/O,,,,3,,
+Access to the Boomi Atom and Molecule from the outside world,IDB-274,34018,,Task,Discovery,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,trevorlee,samwhite,samwhite,2018-07-18,2018-07-27,2018-07-25,,,Platform,,0,,,,"Need to confirm incoming and outgoing transactions for the Boomi atom so the platform can communicate with external webservices and external services can call Boomi webservices
+
+Enables:
+* connection to Synetica API
+* Mendix platform can call PR002 API",,Matthew.BashirWhite,samwhite,trevorlee,,,,,,,,,,,,IDB-188,IDB-252,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|hzzzqe:owg,,,,,,,6. IoT Business Rules & CC I/O,,,,3,,
+SSO for the Boomi Platform,IDB-272,34016,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-07-18,2018-07-26,2018-07-27,2018-07-26,,Platform,,0,Blocked,,,,,Matthew.BashirWhite,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Impediment,,,,,,0|hzzzqe:ow8,,,,,,,5. PR001 UAT & PR002 LIVE,6. IoT Business Rules & CC I/O,,,8,,
+"PR002: Within Mendix, the API is not returning any context as to the error",IDB-271,34015,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,olivercurson,olivercurson,2018-07-17,2018-07-17,2018-07-27,2018-07-17,[PR002] CCR Update Address API - V1.0,,,0,,,,"Mendix doesn't receive the error message that is returned by the API, just the 500 error.",,olivercurson,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:6i,,,,,,,5. PR001 UAT & PR002 LIVE,,,,2,,
+SP002: Create a Logger DB in LIVE,IDB-268,33988,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-07-11,2018-07-20,2018-07-27,2018-07-13,Software Development Life Cycle - V1.1,,,0,,,,"Duplication of the current IPAAS_LOGGING database (and its user created tables/stored procedures) from WAP-VSQLDEV1 to a LIVE server.Â 
+
+This is to mimic our development logging capabilities in LIVE when our processes go into production.Â 
+
+INFO and METRICS logs will be written to the database.Â ",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|hzzzqf:iy,,,,,,,5. PR001 UAT & PR002 LIVE,,,,3,,
+CCR LIVE to include UPRN's,IDB-267,33987,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,jonelsom,samwhite,samwhite,2018-07-11,2018-07-20,2018-07-27,2018-07-17,[PR002] CCR Update Address API - V1.0,,,0,,,,"run the following in CCR_Live to implement changes necessary for iPaaS development:
+
+Â 
+ # Alt_table_locations_uprn
+ # Cre_tab_iPaaS_Staging_PERP_LIST
+ # Refresh_iPaaS_Staging_Perp_List
+ # Pop_location_uprn
+ # Cre_sp_InsertLocation
+ # Cre_usp_ipaas_insertLocation
+ # Grant_ipaas_insertLocation",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iyl,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+PR002: Post Release,IDB-266,33986,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,samwhite,samwhite,2018-07-11,2018-07-23,2018-07-27,2018-07-23,[PR002] CCR Update Address API - V1.0,,,0,,,,"ARM, IG, TPAW and CAB approval.
+
+From Standard Change > Change Process > Step 'Post-Release':Â 
+
+Â 
+|*Post - Release*|*Communications*
+ * Inform Service Desk, support entities and stakeholders of the release.
+ * Inform Product Owner of release.
+*Promotion Testing*
+ * Review process schedules and closely monitor logs.
+ * Process testing where available without impact on LIVE data (notification testing, artefacts testing, passive testing and non-destructive testing).
+*BAU*
+Integration Team will monitor the process and raise bugs in the product backlog where appropriate unless deemed as emergency or critical release where the Deviation Process will be enacted.|",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:izr,,,,,,,5. PR001 UAT & PR002 LIVE,,,,5,,
+PR002: CAB Approval - Update records,IDB-265,33985,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-07-11,2018-07-23,2018-07-27,2018-07-23,[PR002] CCR Update Address API - V1.0,,,0,,,,"ARM, IG, TPAW and CAB approval.
+
+From our Standard Change > Change Process > Step 7 'update records':Â 
+
+Â 
+|*Step 7 â€“ Update records*|Once release to the production environment has happened, Platform Engineering will update information in IServer and the Service catalogue.
+Â 
+Â |",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:izi,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+PR002: CAB Approval - Release,IDB-264,33984,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-07-11,2018-07-23,2018-07-27,2018-07-23,[PR002] CCR Update Address API - V1.0,,,0,,,,"ARM, IG, TPAW and CAB approval.
+
+Â 
+
+From our Standard Change > Change Process > Step 6 'Release':Â 
+
+Â 
+|*Go-Live*
+ On completion of above processes, the Development team is to inform IT&DÂ  Platform Engineering that the process is ready to promote. Â To avoid conflict and overhead on support functions, processes will be released within the following framework:
+ Â 
+ * Times of active scheduled processing must be avoided, in either stakeholder system or Boomi platform.
+ * Avoid deployment where discovery and remediation of Boomi process failure would be difficult due to time scheduling concerns i.e. prior to holidays, weekends and staff absence.
+ Â 
+ The release is to be scheduled in line with communications in step 5.
+ Â 
+ Boomi Process promotion procedure can be found here:
+ [http://wap-jira:8090/pages/viewpage.action?pageId=6784138]
+ Â 
+ Platform Engineering will confirm back to Development Team that promotion was successful and ,close the Marval ticketÂ 729048 as completed.
+ Â |",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iz9,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+PR002: CAB Approval - Communications,IDB-263,33983,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-07-11,2018-07-19,2018-07-27,2018-07-19,[PR002] CCR Update Address API - V1.0,,,0,,,,"To complete:
+ * FSoC entry will be added by Platform Engineering - Proposed Monday 23rd July
+ * PE to Inform Service Desk, -support entities-",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iyj,,,,,,,5. PR001 UAT & PR002 LIVE,,,,2,,
+PR002: CAB Approval - Operational Setup,IDB-262,33982,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-07-11,2018-07-23,2018-07-27,2018-07-23,[PR002] CCR Update Address API - V1.0,,,0,,,,"*From Standard Change > Change process > Step 4 'Operational Setup':*
+
+*Service Accounts*
+
+Â API User Account for CCR Update Address API using PE SOP
+
+User: ipaas_ccr_user
+
+*Endpoints:*
+
+CCR Live DB on WAP-SQL2
+
+IPAAS_LOGGING Live DB on WAP-VSQL2
+
+For reference: _[http://wap-jira:8090/display/IDB/Connection+Library_]
+
+*Extensions:*
+
+Copy from DEV for first initial deployment to PROD.Â 
+
+Extension DPP_SP002_EMAIL_RECIPIENT to be set to - [ITAndDDigitalTeam@brighton-hove.gov.uk|mailto:ITAndDDigitalTeam@brighton-hove.gov.uk]Â 
+
+*Schedule:*
+
+NA - This is an APIÂ ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iyu,,,,,,,5. PR001 UAT & PR002 LIVE,,,,5,,
+PR002: CAB Approval - Testing,IDB-261,33981,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-07-11,2018-07-18,2018-07-27,2018-07-18,[PR002] CCR Update Address API - V1.0,,,0,,,,"* Record UAT test plan in SharePoint
+ * Release notes page in Confluence
+ * Documents prepared for IG (PDF's from Confluence)
+
+Â ",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iyi,,,,,,,5. PR001 UAT & PR002 LIVE,,,,2,,
+PR002: CAB Approval - Readiness steps,IDB-260,33980,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-07-11,2018-07-24,2018-07-27,2018-07-18,[PR002] CCR Update Address API - V1.0,,,0,,,,"Describe the actions carried out by Jon Elsom (Marval Call) to:
+ * Update a table to include new columns CCR
+ * Create a new stored procedure for CCR
+ * Run a script to populate DB Table with UPRNS
+
+Further actions:
+ * UAT complete
+ * Stakeholder sign off (Mark sign-off)
+ * Code review complete",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:is,,,,,,,5. PR001 UAT & PR002 LIVE,,,,2,,
+PR002: CAB Approval - Information Governance Review,IDB-259,33979,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-07-11,2018-07-17,2018-07-27,2018-07-17,[PR002] CCR Update Address API - V1.0,,,0,,,,"* Plan PE involvement
+ * Book IG Workshop and attend
+ * Approval granted
+
+Â ",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:iyc,,,,,,,5. PR001 UAT & PR002 LIVE,,,,3,,
+SP002: DPIA for the Logger,IDB-258,33978,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-07-11,2018-07-13,2018-07-27,2018-07-13,Software Development Life Cycle - V1.1,,,0,,,,"Complete a DPIA assessment for the logger.Â 
+
+Define retention schedule for the data in the logger and flat files.Â 
+
+Â ",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,12/Jul/18 2:03 PM;olivercurson;IPAAS - SP002 - DPIA.docx;http://wap-jira:8080/secure/attachment/12913/IPAAS+-+SP002+-+DPIA.docx,,,,,IDB-135,,,,,,,,,,,,0|hzzzqf:iw,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+Agree with IG for access to the Customer Index.,IDB-256,33976,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-07-11,2018-07-20,2018-07-27,2018-07-20,ClearCore Data Processing - V1.0,,,0,,,,"Identify a named Asset Owner for CI.
+
+IAR entry has been created.",,christineproe,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|hzzzqf:7,,,,,,,5. PR001 UAT & PR002 LIVE,,,,8,,
+Obtain DPIA for Council Tax and Benefits,IDB-255,33975,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-07-11,2018-07-24,2018-07-27,2018-07-24,ClearCore Data Processing - V1.0,,,0,,,,"* ascertain the list of DPIAs we need to obtain
+ * create a standard method for adding DPIAs in the future for other datasets
+
+Â 
+
+Know we need at least these:
+ * overarching DPIA for Clearcore
+ * overarching DPIA for Boomi
+ * DPIA iWorld
+ * DPIA CCR",,christineproe,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-158,,,,,,,,,,,,0|hzzzqf:6,,,,,,,5. PR001 UAT & PR002 LIVE,,,,5,,
+Obtain DPIA for Achieve,IDB-254,33974,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-07-11,2018-07-24,2018-07-27,2018-07-24,ClearCore Data Processing - V1.0,,,0,,,,"* ascertain the list of DPIAs we need to obtain
+ * create a standard method for adding DPIAs in the future for other datasets
+
+Â 
+
+Know we need at least these:
+ * overarching DPIA for Clearcore
+ * overarching DPIA for Boomi
+ * DPIA iWorld
+ * DPIA CCR",,christineproe,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-158,,,,,,,,,,,,0|hzzzqf:4,,,,,,,5. PR001 UAT & PR002 LIVE,,,,5,,
+SQL Demonstration of Customer Index ,IDB-253,33973,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,samwhite,samwhite,2018-07-11,2018-07-20,2018-07-27,2018-07-20,ClearCore Data Processing - V1.0,,,0,,,,Setup a connection to the Customer Index for Chissy Proe to access records.,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|hzzzqf:8,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+Connect to Synetica API on Boomi Atom using RESTLet,IDB-252,33970,,Task,Discovery,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,kieranrichards,samwhite,samwhite,2018-07-10,2018-07-27,2018-07-25,,IoT to iCasework - V1.0,,,0,Discovery,,,"Diagnose connectivity issues to the Synetica API by using Restlet on the Boomi Atom.Â 
+ * Connected to Synetica
+
+AC:
+* successful connection by Restlet on the boomi server
+* ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:ows,,,,,,,6. IoT Business Rules & CC I/O,,,,2,,
+PR002: Create a DPIA,IDB-251,33969,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-07-10,2018-07-13,2018-07-27,2018-07-13,[PR002] CCR Update Address API - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:ir,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+PR001: Create a DPIA,IDB-250,33968,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-07-10,2018-07-13,2018-07-27,2018-07-13,[PR001] CCR Update Address - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:ii,,,,,,,5. PR001 UAT & PR002 LIVE,,,,1,,
+Determine if viable to keep Achieve as a ClearCore data feed,IDB-245,33960,,New Feature,Deploy,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,christineproe,kieranrichards,kieranrichards,2018-07-05,2018-07-25,2018-07-23,,ClearCore Data Processing - V1.0,,,0,,,,Evaluate the data quality of the Achieve data and evaluate the information the customers would have seen when creating accounts.Â ,,kieranrichards,olivercurson,RichardAClarke,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|hzzzqe:owc,,,,,,,5. PR001 UAT & PR002 LIVE,6. IoT Business Rules & CC I/O,,,5,,
+PR001: Re-schedule the process to run post ClearCore production ,IDB-244,33957,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,samwhite,samwhite,2018-06-29,2018-07-02,2018-07-27,2018-07-02,[PR001] CCR Update Address - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:k,,,,,,,4. Put CCR into Production,,,,0.5,,
+Re-schedule ClearCore to run inline with delivery of REC302 files,IDB-243,33956,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-06-29,2018-07-03,2018-07-27,2018-07-03,ClearCore Data Processing - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|hzzzqf:j,,,,,,,4. Put CCR into Production,,,,0.5,,
+PR002: Create a Mendix Front End for CCR Demo,IDB-241,33942,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,samwhite,samwhite,2018-06-27,2018-07-12,2018-07-27,2018-06-29,[PR002] CCR Update Address API - V1.0,,,0,,,,Robust demo front-end to update address in CCR.Â ,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzq9:3,,,,,,,4. Put CCR into Production,,,,5,,
+PR001: Devise a convincing front-end demonstration ,IDB-240,33941,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,samwhite,samwhite,2018-06-27,2018-07-19,2018-07-27,2018-07-19,[PR001] CCR Update Address - V1.0,,,0,,,,"Arrange with the following people:
+ * ClearCore - Chrissy Pro
+ * CTAX - Charlotte Bennett
+
+Identify UAT criteria with end user.
+
+Identify confirmation views to show to stakeholder i.e. updated DB tables (before/after).Â 
+
+Obtain test data or get agreement test data is sufficient.
+
+Broadly script demonstration.Â Â 
+
+Practice run before demo.
+
+Book peoples time.Â ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:a,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,,,13,,
+Connect to Synetica API in Test,IDB-235,33936,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-06-27,2018-06-29,2018-07-27,2018-06-28,IoT to iCasework - V1.0,,,0,,,,"We need to investigate the iCaseWork API and understand how to connect to this system using their API. This should include a clear demonstration of connection.
+
+Â 
+
+Resources:
+
+*Â [iCaseworkâ€™s SDD|http://wave.brighton-hove.gov.uk/sites/BHCC/Ts_ICT/IS/DocReg/SharedDocuments/iCasework%20(CCM)/Service%20Definition%20-%20iCasework%20-%20v1.1.docx]
+
+Reading the documentation, the APIs are part of the UsefulFeedback module:
+
+UsefulFeedback provides a range of powerful and extensible REST style web-services that allow both update and query operations such as case creation, case updates,Â adding case notes or retrieving case details to be invoked remotely. The APIs make integrating UsefulFeedback with other business critical systems simple and straightforward.
+
+[https://icasework.atlassian.net/wiki/spaces/UsefulFeedback/pages/15171599/iCasework+REST+APIs]Â 
+
+It looks like the test site urls are in the format [https://uat.icasework.com/createaction?db=[youriCaseworkAccount|https://uat.icasework.com/createaction?db=%5byouriCaseworkAccount]]
+
+Live site is atÂ bhcc.icasework.com
+
+A number of service users have access to the support portal + Matt Skelton.
+
+Users are listed [here|http://wave.brighton-hove.gov.uk/sites/BHCC/xd/iC/Shared%20Documents/Forms/AllItems.aspx]
+
+Connected successfully and receive sufficient return from API.Â Â ",,samwhite,,,,,,,,,,,,,,,,IDB-230,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzpo:,,,,,,,4. Put CCR into Production,,,,8,,
+Connect to iCasework API in Test,IDB-230,33931,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,samwhite,samwhite,2018-06-27,2018-07-26,2018-07-23,2018-07-26,IoT to iCasework - V1.0,,,0,,,,"Goal:- Connect successfully and retrieve any arbitrary data from from ManageMyCases API.Â Â 
+
+Â 
+
+*Documentation for: ManageMyCases > ManageMyRequests*
+
+[http://wave.brighton-hove.gov.uk/sites/BHCC/xd/iC/Shared%20Documents/ManageMyCases/ManageMyRequests%20brochure.pdf]
+
+*Training Site Information*
+
+Â 
+
+*[http://wave.brighton-hove.gov.uk/sites/BHCC/xd/iC/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fsites%2fBHCC%2fxd%2fiC%2fShared%20Documents%2fTraining&FolderCTID=&View=%7bA0949D43%2dDC69%2d426D%2d8E95%2dF1233EED8AC1%7d*]",,RichardAClarke,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:ow4,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,6. IoT Business Rules & CC I/O,,8,,
+API Publishing Procedure,IDB-229,33925,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,Matthew.BashirWhite,samwhite,samwhite,2018-06-25,2018-07-13,2018-07-27,2018-07-13,Software Development Life Cycle - V1.1,,,0,,,,"Document a process to create API users and link the user to that API and that API only to the user account.
+
+Document on Confluence.Â 
+
+Platform to carry out the process and sign off the documentation.
+
+Â ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|hzzzqf:iyo,,,,,,,5. PR001 UAT & PR002 LIVE,,,,2,,
+Amend stored procedure to return if a response for attempted duplicate insert,IDB-228,33924,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-25,2018-07-06,2018-07-27,2018-07-06,[PR001] CCR Update Address - V1.0,,,0,,,,"Stored procedure returns a response based on insert logic.Â 
+
+Compound key violation:
+ * PERP ID
+ * UPRN
+ * Last Update",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzpu:,,,,,,,4. Put CCR into Production,,,,2,,
+PR001: CAB Approval - CAB [Standard Change],IDB-227,33923,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,samwhite,samwhite,2018-06-25,2018-07-13,2018-07-27,2018-07-13,[PR001] CCR Update Address - V1.0,,,0,,,,CAB Approval.Â ,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:i,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,,,1,,
+PR001: CAB Approval - TPAW [Standard Change],IDB-226,33922,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-25,2018-07-12,2018-07-27,2018-07-12,[PR001] CCR Update Address - V1.0,,,0,,,,,,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:g,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,,,3,,
+PR001: CAB Approval - IG [Standard Change],IDB-225,33921,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-25,2018-07-10,2018-07-27,2018-07-10,[PR001] CCR Update Address - V1.0,,,0,,,,,,olivercurson,RichardAClarke,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqe:i,,,,,,,4. Put CCR into Production,,,,13,,
+PR001: E-mail CCR address changes to business customer.,IDB-221,33917,,New Feature,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-25,2018-07-03,2018-07-27,2018-07-03,[PR001] CCR Update Address - V1.0,,,0,,,,Email is being received with address changes in given format.,,olivercurson,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzpk:,,,,,,,4. Put CCR into Production,,,,2,,
+PR002: Carryout code review for process,IDB-218,33902,,Story,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-06-25,2018-07-12,2018-07-18,2018-07-06,[PR002] CCR Update Address API - V1.0,,,0,,,,Validation of actionable items.,,kieranrichards,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzph:,,,,,,,4. Put CCR into Production,,,,8,,
+SP002: Automatic method to restore process default log level after using exceptional log levels such as WARNING,IDB-212,33896,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-22,2018-07-06,2018-07-27,2018-07-06,Software Development Life Cycle - V1.1,Software Development Life Cycle,,0,,,,Implement DDP's to deal with log levels in the SP002.Â ,,olivercurson,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|hzzzpi:,,,,,,,4. Put CCR into Production,,,,2,,
+PR002: Carry out UAT of the CCR update address API to ensure it meets the needs of the business.,IDB-206,33889,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-21,2018-07-17,2018-07-27,2018-07-17,[PR002] CCR Update Address API - V1.0,,,0,,,,"* Acceptance criteria to be agreed by Andre Bradford.
+ * Acceptance criteria to be met by the process and signed off - demonstrated its updated in the DB (CCR TEST).
+ * UAT to be signed off by Andre Bradford.",,kieranrichards,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqf:e,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,,,5,,
+PR001: Carry out UAT of the CCR update process to ensure it meets the needs of the business.,IDB-205,33888,,Task,Test,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,richardbeech,samwhite,samwhite,2018-06-21,2018-07-25,2018-07-27,,[PR001] CCR Update Address - V1.0,,,0,,,,"* Acceptance criteria to be agreed by Charlotte Bennett and Mark Flynn
+ * Acceptance criteria to be met by the process and signed off.
+ * UAT to be signed off by Charlotte Bennett and Mark Flynn.",,richardbeech,samwhite,,,,,,,,,,,,,IDB-207,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|hzzzqe:oy,,,,,,,4. Put CCR into Production,5. PR001 UAT & PR002 LIVE,,,8,,
+Create documentation for ClearCore,IDB-200,33874,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-06-19,2018-06-26,2018-07-27,2018-06-21,ClearCore Data Processing - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:ex,,,,,,,3. Get clear on ClearCore,,,,5,,
+Create a Mendix front-end application ready to consume CCR Update Address API,IDB-199,33872,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,samwhite,samwhite,2018-06-15,2018-07-12,2018-07-27,2018-06-19,[PR002] CCR Update Address API - V1.0,,,0,,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:e9,,,,,,,3. Get clear on ClearCore,,,,3,,
+Connect to the Synetica API in the Boomi Platform to retrieve sensor data.,IDB-188,33856,,Task,Discovery,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,kieranrichards,samwhite,samwhite,2018-06-13,2018-07-27,2018-07-25,,IoT to iCasework - V1.0,,,0,,,,"Target a particular sensor by connecting to the cloud backend using a Boomi Process.
+
+Assumes that we have made a successful connection from the Boomi atom via Restlet
+
+* could be any sensor
+* usable data in the expected JSON format
+* doesn't use sequential queries or logical tests - just makes a known query work
+
+Â ",,richardbeech,samwhite,,,,,,,,,,,,,,,,IDB-276,IDB-277,,,,,,,,,,,,,IDB-161,,,,,,,,,,,,0|hzzzqe:oww,,,,,,,6. IoT Business Rules & CC I/O,,,,3,,
+Obtain DPIA for datasets connected to ClearCore,IDB-181,33841,,Task,Development,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,christineproe,samwhite,samwhite,2018-06-11,2018-07-25,2018-07-27,,ClearCore Data Processing - V1.0,,,0,,,,"* ascertain the list of DPIAs we need to obtain
+ * create a standard method for adding DPIAs in the future for other datasets
+
+Â 
+
+Know we need at least these:
+ * overarching DPIA for Clearcore
+ * overarching DPIA for Boomi
+ * DPIA iWorld
+ * DPIA CCR",,kieranrichards,samwhite,,,,,,,,,,,,,,,,IDB-254,IDB-255,,,,,,,,,,,,,IDB-158,,,,,,,,,,,,0|hzzzqe:oxi,,,,,,,3. Get clear on ClearCore,6. IoT Business Rules & CC I/O,,,5,,
+Analysis: iWorld to ClearCore automation task,IDB-178,33838,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-06-11,2018-06-26,2018-07-27,2018-06-26,ClearCore Data Processing - V1.0,,,0,,,,Gather and collate analysis for the automation task of data from iWorld to ClearCore.Â ,,kieranrichards,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:cr,,,,,,,3. Get clear on ClearCore,,,,8,,
+iWorld API Understanding,IDB-177,33837,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,samwhite,samwhite,2018-06-11,2018-06-22,2018-07-27,,,,,0,,,,"API overview for iWorld to understand how its used in current projects and its potential for iPaaS.Â 
+ * How can we populate iWorld with synthetic data for matching and non-matching records.",,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|o00007:w,,,,,,,,,,,8,,
+"As a JID, I need an Introduction to Mendix to understand how it consumes API's.",IDB-175,33835,,Story,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,samwhite,samwhite,2018-06-11,2018-06-26,2018-07-27,2018-06-22,Software Development Life Cycle - V1.1,,,0,,,,Introduction to Mendix to understand how it consumes API's.,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:ei,,,,,,,3. Get clear on ClearCore,,,,3,,
+"As a developer, I need an API to allow my applications (e.g. Mendix) to publish address changes to CCR.",IDB-173,33833,,Story,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-06-11,2018-07-12,2018-07-27,2018-06-22,[PR002] CCR Update Address API - V1.0,,,0,,,,"An API is needed to allow external (outside of iPaaS) applications to publish address changes in the CCR database. The API needs to be secure and published internally.Â 
+
+Â 
+
+This doc explains why this is valuable:Â [http://wave.brighton-hove.gov.uk/LGCSDocumentLibrary/Health%20and%20safety/CCR/Updating%20a%20CCR%20Address%2013.03.17.docx]
+
+Â 
+
+*Updating a Client of Concern Address*
+
+{color:#d04437}The nature of the Achieve system means that the only way to show a change of address for a perpetrator on the Clients of Concern Register (CCR) is to raise a new incident form{color}.Â  This process is being reviewed by ICT but in the interim staff will need to record details as a new Violence & Aggression incident as follows:
+ * *Part A* (incident details) type in words to the effect that Mr/Mrs ** is known to have moved from **** to ****. Whatever is typed here shows on CCR.
+ * *Perpetrator details* â€“ select the perpetrator name from the drop down list and over-type the address fields as relevant.
+ * *Manager Review* section â€“ type in â€˜Address change onlyâ€™ into each box. This does not show on CCR and so can be kept brief.
+ * *Manager Review* â€“ the questionnaire still needs to be completed as known
+ * *Gatekeeper Review* - can just agree with manager and tick â€˜update CCRâ€™.
+ * *Letter task* â€“ Manager can select no letter being sent.
+ * *The Health & Safety Team* â€“ can take action to exclude the report from statistics.
+
+These steps represent a lengthy workaround that could be solved with a much simpler feature.",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-187,,,,,,,,,,,,0|i03nlc:e,,,,,,,3. Get clear on ClearCore,,,,8,,
+PR001: External Code Review: Dell to Code Review,IDB-172,33832,,Task,Test,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,richardbeech,samwhite,samwhite,2018-06-11,2018-07-18,2018-07-27,,Software Development Life Cycle - V1.1,,,0,Blocked,,,"Organise and execute by Dell a code review for [PR001].
+ * Liaise with Mike Duzen to arrange time with Dell to carry out the code review.Â Â ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Impediment,,,,,,0|hzzzqf:nc,,,,,,,3. Get clear on ClearCore,,,,1,,
+Code Review: logging process [SP002],IDB-171,33831,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-08,2018-06-26,2018-07-27,2018-06-25,Software Development Life Cycle - V1.1,,,0,,,,Complete code review of [SP002],,olivercurson,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:b4,,,,,,,3. Get clear on ClearCore,,,,8,,
+Logger training session and documentation,IDB-169,33829,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-08,2018-06-26,2018-07-27,2018-06-25,Software Development Life Cycle - V1.1,,,0,,,,,,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:b9,,,,,,,3. Get clear on ClearCore,,,,3,,
+Organise a ClearCore consultancy day to understand ClearCore,IDB-167,33824,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,samwhite,samwhite,2018-06-07,2018-06-26,2018-07-27,2018-06-15,ClearCore Data Processing - V1.0,,,0,,,,"Compile a list of questions on Confluence.
+
+Invite CC in, book room and hold session.",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|i03nlc:ai,,,,,,,3. Get clear on ClearCore,,,,3,,
+Improve the logger process [SP002] to collect metrics,IDB-165,33822,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-06-07,2018-06-26,2018-07-27,2018-06-18,Software Development Life Cycle - V1.1,Software Development Life Cycle,,0,,,,"Improve the Logger [SP002] to include a method to include metrics.
+ # *Output data to 'metrics' folder*
+ Each process gets its own folder, and within that, files are organised by date range, (TBD) which will be part of the filename.
+ # *Insert data into separate metrics database*
+ It is not necessary within a DB to establish this organisation, since we have access to SQL to filter output.
+
+[~NeilCholerton] to provide any additional metrics if needed.
+
+*Acceptance Criteria:*
+
+File structure in place and metrics written to DB.",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:b2,,,,,,,3. Get clear on ClearCore,,,,3,,
+Create a iPaaS template process to be used for all new processes,IDB-164,33821,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,samwhite,samwhite,2018-06-07,2018-06-26,2018-07-27,2018-06-18,Software Development Life Cycle - V1.1,,,0,,,,Create a template process to be used by all new processes that incorporates common components and sub processes.Â Â ,,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:bi,,,,,,,3. Get clear on ClearCore,,,,1,,
+Formulate a formal liaison process with RBTECH ,IDB-163,33820,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,samwhite,samwhite,2018-06-07,2018-06-21,2018-07-27,2018-06-21,,,,0,,,,A formal liaison process needs to take place with RBTECH to allow us to utilise resources within RBTECH whilst developing and to allow us to carry out adequate testing.Â Â ,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,IDB-177,IDB-178,,,,,,,,,,,,,,,,,,0|i03nlc:c,,,,,,,3. Get clear on ClearCore,,,,3,,
+"As a data solutions team member, I need the REC302 data from iWorld to be automatically dropped daily into ClearCore for processing.",IDB-162,33819,,Story,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,NeilCholerton,RichardAClarke,2018-06-07,2018-06-29,2018-07-27,2018-06-29,ClearCore Data Processing - V1.0,,,0,,,,"Automation of the iWorld to Clearcore data transfer.
+
+Need to document existing data transfer process (or locate documentation)Â 
+
+Need to run the transfer on demand for TEST, but on a schedule TBC in LIVE.
+
+Currently - we think the LOCTA processes are run on demand manually in iWorld, producing files that are then picked up by ClearCore.Â 
+
+Need to agree with RBTech whether we can query by API or trigger the LOCTA files on demand.
+
+Need to understand the LOCTA file format.
+
+!image-2018-06-07-12-28-03-665.png!
+
+Â ",,RichardAClarke,,,,,,,,,,,,,,,,IDB-147,,,,,,,,,,07/Jun/18 12:28 PM;RichardAClarke;image-2018-06-07-12-28-03-665.png;http://wap-jira:8080/secure/attachment/12907/image-2018-06-07-12-28-03-665.png,,,,,,Data Source Automation - iWorld,,,,,,,,,,,0|hzzzq6:,,,,,,,3. Get clear on ClearCore,4. Put CCR into Production,,,3,,
+Compile and order candidate data sources for Clearcore,IDB-159,33816,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Highest,Done,kieranrichards,RichardAClarke,RichardAClarke,2018-06-07,2018-06-26,2018-07-27,2018-06-22,ClearCore Data Processing - V1.0,,,0,,,,"Agree the data sources we will connect to ClearCore DEV, based on Schedule of WorksÂ  plus the LLPG - V8.6 section 3.2.1.
+
+Documented how each data source is consumed by ClearCore. Is the input usable and documented. Define: Complete, Consistent, (accurate) valid and current.Â 
+ * Complete - every field complete
+ * Consistent - Match key fields
+ * Valid - does not contain rubbish data
+ * Current - recent data
+ * Scheduled - is it scheduled and how often.
+ * Accurate - Does data reflect reality
+
+Identify the business owner (possibly Information Assets Register - IAR - Pete Bode)
+
+Allow us to add unknown.Â 
+
+Data sources can be found on the SoWÂ on page 7.
+
+Breakdown into smaller tasks - by systems.",,kieranrichards,RichardAClarke,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-158,,,,,,,,,,,,0|i03nlc:a,,,,,,,3. Get clear on ClearCore,,,,8,,
+[Data Source Automation - template],IDB-147,33745,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,garyduckworth,garyduckworth,2018-05-24,2018-06-21,2018-07-27,,,,,0,,,,We need to ensure that all data sources feeding into ClearCore are automated. Some of these may require IPaaS to run and move scheduled data in order to generate the output needed as a ClearCore input. All ClearCore inputs need to be clarified and we also need to confirm that TEST data is being used for the TEST environment and for live (see other task),,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|o00007:,,,,,,,,,,,10,,
+My Account ID Verification,IDB-146,33744,,Task,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,garyduckworth,garyduckworth,2018-05-24,2018-06-21,2018-07-27,,,,,0,,,,We need to understand the My Account ID Verification and whether we use a custom/in-should API. We will need to verify a name and address and return whether this is a true/false match.,,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-144,,,,,,,,,,,,0|o00006:z,,,,,,,,,,,8,,
+Investigate a number of different and unrelated items,IDB-144,33742,,Epic,To Do,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,,,garyduckworth,garyduckworth,2018-05-24,2018-06-21,2018-07-27,,,,,0,,,,"We need to investigate a number of different and unrelated items as per the tasks. These reflect ongoing work in areas such as iCaseWork, My Account, ID Verification, IoT etc.",,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ghx-label-6,,iCaseWork and My Account,To Do,,,,,,,,,,0|i03osd:,,,,,,,,,,,10,,
+Processing Advice for Anonymising ,IDB-143,33741,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,kieranrichards,kieranrichards,2018-05-24,2018-06-06,2018-07-27,2018-06-06,,,,0,,,,"# Arrange a meeting.
+ # Understand the impact.
+ # Document and distribute knowledge.",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-142,,,,,,,,,,,,0|i03nlc:hz,,,,,,,2. Improve CCR Process,,,,2,,
+Boomi Naming Convention,IDB-141,33739,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,kieranrichards,kieranrichards,2018-05-24,2018-06-22,2018-07-27,2018-05-31,Software Development Life Cycle - V1.0,,,0,,,,"# Discuss
+ # Understand
+ # Document and update
+ # Adopt",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,30/May/18 10:59 AM;kieranrichards;Naming Convention Notes.docx;http://wap-jira:8080/secure/attachment/12904/Naming+Convention+Notes.docx,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:hy,,,,,,,2. Improve CCR Process,,,,2,,
+Formalise the 'Commit' Process for Boomi Processes,IDB-140,33738,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-24,2018-06-22,2018-07-27,2018-06-08,Software Development Life Cycle - V1.0,,,0,,,,"# Discuss process.
+ # Understand process.
+ # Document process.
+ # Adopt process.",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:hw,,,,,,,2. Improve CCR Process,,,,2,,
+House Keeping on Boomi Platform,IDB-139,33737,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,kieranrichards,kieranrichards,2018-05-24,2018-06-08,2018-07-27,2018-06-08,,,,0,,,,"# Group process review and understanding.Â 
+ # Follow naming convention.
+ # Clear the canvas.Â ",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:hr,,,,,,,2. Improve CCR Process,,,,1,,
+Code Review Process,IDB-138,33736,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-24,2018-06-22,2018-07-27,2018-05-30,Software Development Life Cycle - V1.0,,,0,,,,"# Code review meeting to outline process.
+ # Identify improvements, faults, design issues and sanity check with the meeting.
+ # Generate a 'Code Review Agreement'.",,kieranrichards,richardbeech,,,,,,,,,,,,,,,,,,,,,,,,,29/May/18 10:48 AM;richardbeech;An Introduction to Code Reviews.pptx;http://wap-jira:8080/secure/attachment/12900/An+Introduction+to+Code+Reviews.pptx,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:hi,,,,,,,2. Improve CCR Process,,,,5,,
+Define and run functional test cases,IDB-137,33735,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,kieranrichards,kieranrichards,2018-05-24,2018-06-06,2018-07-27,2018-06-06,,,,0,,,,"# Understand the data to be tested.
+ # Define positive and negative tests end to end.Â 
+ # Run positive and negative tests and verify results.
+ # Update Confluence with test cases and results.",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-135,,,,,,,,,,,,0|i03nlc:h,,,,,,,2. Improve CCR Process,,,,5,,
+"Permanent Boomi DIR for INPUT, OUT and LOGGING ",IDB-134,33732,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,samwhite,samwhite,2018-05-24,2018-05-31,2018-07-27,2018-05-31,,,,0,,,,"# Raise a MARVAL call.
+ # Create a Boomi DIR for INPUT on the Boomi Atom [TEST].
+ # Create a Boomi DIR for OUTPUT on the Boomi AtomÂ [TEST].
+ # Create a Boomi DIR for LOGGING on the Boomi AtomÂ [TEST].
+ # JID Team to have RW access to the DIR.
+ # Boomi Service account to have RW access to the DIR.
+ # DIR shared for relevant parties and verify access.
+ # Create DISK Connector.",,olivercurson,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlb:i,,,,,,,2. Improve CCR Process,,,,1,,
+Investigation of Atmosphere function for identifying duplicated records,IDB-132,33730,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-05-24,2018-05-30,2018-07-27,2018-05-30,,,,0,,,,"# Research the function.
+ # Understand the function.
+ # Decide if it can be used.
+ # Implement if necessary.",,kieranrichards,richardbeech,samwhite,,,,,,,,,,,,,,,,,,,,,,,,29/May/18 11:37 AM;richardbeech;atomsphere dedupe.png;http://wap-jira:8080/secure/attachment/12902/atomsphere+dedupe.png,,,,,,,,,,,,,,,,,0|i03nlb:,,,,,,,2. Improve CCR Process,,,,2,,
+Confirm the Usability of Test Data,IDB-131,33729,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,kieranrichards,kieranrichards,2018-05-24,2018-06-07,2018-07-27,2018-06-07,,,,0,,,,"Test data for CCR, updatesBV and updatesXref should be truly representative of live data, same specification, same size, ideally anonymised.Â 
+
+Just identify issues.",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:g,,,,,,,2. Improve CCR Process,,,,8,,
+Test / Production ClearCore Mismatch,IDB-130,33728,,Impediment,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,garyduckworth,garyduckworth,garyduckworth,2018-05-24,2018-05-31,2018-07-27,2018-05-31,,,,0,,,,IPaaS needs to be able to get the TEST data from the POLLED FOR CHANGE reports (UpdatesBV and UpdatesXREF) that can linked to data within TEST CCR,,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|i03nlc:i,,,,,,,2. Improve CCR Process,,,,0,,
+Rebuild Test ClearCore Environment,IDB-129,33727,,Impediment,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,garyduckworth,garyduckworth,garyduckworth,2018-05-24,2018-06-04,2018-07-27,2018-05-31,,,,0,,,,"The current ClearCore environment on WAP-CC-DEV uses a variety of TEST and LIVE data feeds. The ClearCore environments need to be setup to have TEST data from TEST systems in WAP-CC-DEV andÂ have LIVE data from LIVE systems in WAP-CC-LIVE
+
+Â 
+
+[Split into Subtasks][Split into Subtasks]",,garyduckworth,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,Impediment,,,,,,0|i03nlc:r,,,,,,,2. Improve CCR Process,,,,0,,
+Code Cleanup,IDB-127,33725,,Improvement,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-05-24,2018-06-07,2018-07-27,2018-06-07,,,,0,,,,"# Clean up code to remove overhanging process testing and sub process testing.
+ # Ensure the process and sub-process meet the naming convention.
+ # Update Confluence with the changes where necessary and appropriate.Â ",,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nla:,,,,,,,2. Improve CCR Process,,,,3,,
+Integration Connection Test,IDB-125,33723,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-24,2018-06-07,2018-07-27,2018-06-07,,,,0,,,,"Ensuring the process can connect and interact with CCR, CC best view and Xref.
+
+In a manner that is as similar as possible to the live environment.Â 
+
+Â 
+
+estimated 2-8
+
+Â 
+
+Â ",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:f,,,,,,,2. Improve CCR Process,,,,8,,
+ClearCore Output Process Change,IDB-123,33703,,New Feature,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,samwhite,garyduckworth,garyduckworth,2018-05-22,2018-06-05,2018-07-27,2018-06-05,,Clients of Concern,,0,,,,The Data Solutions team need to ensure that the ClearCore processing that is run overnight is changed to ensure that for each environment (DEV/LIVE) the files are output onto either the Boomi server (DEV) or the NAS box (LIVE).,,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:,,,,,,,2. Improve CCR Process,,,,0.5,,
+ClearCore Output File Location - DEV,IDB-122,33702,,New Feature,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,garyduckworth,garyduckworth,2018-05-22,2018-05-31,2018-07-27,2018-05-31,,,,0,,,,"There is an issue with the current DFS structure in that Boomi does not recognise certain file paths. As such we need to ensure that the output files from ClearCore, and other undefined systems, that are consumed by Boomi are placed in an appropiate location.
+
+The current recommendation is to setup a filestore on each of the Dell Boomi servers.
+ * The DEV environment will need an individual files store setup on the server.",,garyduckworth,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-126,,,,,,,,,,,,0|i03nlc:hzi,,,,,,,2. Improve CCR Process,,,,2,,
+Error Cases,IDB-121,33701,,New Feature,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,garyduckworth,garyduckworth,2018-05-22,2018-06-26,2018-07-27,2018-06-07,Software Development Life Cycle - V1.1,Clients of Concern,,0,security,,,"* Business driven exceptions for scenariosÂ 
+ * Error Logging log points - For example, all 'inserts' into the CCR database need a verification process - maybe using try/catch and associated error logging. Once inserted were the correct number inserted and if not what happened to the non-inserts.....
+ * Trapping error records",,garyduckworth,olivercurson,richardbeech,,,,,,,,,,,,,,,,,,,,,,,,29/May/18 11:08 AM;richardbeech;Logging process design.docx;http://wap-jira:8080/secure/attachment/12901/Logging+process+design.docx,,,,,,,,,,,,,,,,,0|i03nlb:r,,,,,,,2. Improve CCR Process,,,,8,,
+Validation: Feed CCR Address changes into ClearCore,IDB-119,33670,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,christineproe,kieranrichards,kieranrichards,2018-05-18,2018-06-25,2018-07-27,2018-06-25,[PR001] CCR Update Address - V1.0,,,0,CCR,,,,,kieranrichards,RichardAClarke,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:ew,,,,,,,1. CCR Address Update,2. Improve CCR Process,3. Get clear on ClearCore,,1,,
+Match the expected address with the actual address changes in the DELTA,IDB-118,33669,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-18,2018-06-26,2018-07-27,2018-06-22,[PR001] CCR Update Address - V1.0,,,0,CCR,,,"# Follow a changed client through the process and verify.
+ # Follow an unchanged client through the process and verify.",,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:9w,,,,,,,1. CCR Address Update,2. Improve CCR Process,3. Get clear on ClearCore,,0.5,,
+Keep a history of address changes in CCR,IDB-117,33668,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,kieranrichards,kieranrichards,2018-05-18,2018-05-23,2018-07-27,2018-05-23,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol8:zw,,,,,,,1. CCR Address Update,,,,0,,
+Call the CCR 'update address' stored procedure,IDB-116,33667,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,kieranrichards,kieranrichards,2018-05-18,2018-05-23,2018-07-27,2018-05-23,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol8:zr,,,,,,,1. CCR Address Update,,,,1,,
+Test and refine the Boomi Process,IDB-115,33666,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,kieranrichards,kieranrichards,2018-05-18,2018-06-26,2018-07-27,2018-06-07,[PR001] CCR Update Address - V1.0,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-112,,,,,,,,,,,,0|i03nlc:9,,,,,,,1. CCR Address Update,2. Improve CCR Process,,,13,,
+Build the Boomi Process.,IDB-114,33665,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-18,2018-05-23,2018-07-27,2018-05-23,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-112,,,,,,,,,,,,0|i03ol8:z,,,,,,,1. CCR Address Update,,,,8,,
+Breakdown and plan for Boomi process.,IDB-113,33664,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-18,2018-05-21,2018-07-27,2018-05-21,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,IDB-112,,,,,,,,,,,,0|i03ol8:y,,,,,,,1. CCR Address Update,,,,5,,
+Formalise address format in CCR database - UPRN etc. Add UPRN's to CCR address database match and insert.,IDB-111,33662,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,jonelsom,kieranrichards,kieranrichards,2018-05-18,2018-05-18,2018-07-27,2018-05-18,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol8:r,,,,,,,1. CCR Address Update,,,,5,,
+Analyse exsititing CCR client address quality in TEST. Match address with UPRN to LLPG.,IDB-110,33661,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,jonelsom,kieranrichards,kieranrichards,2018-05-18,2018-05-18,2018-07-27,2018-05-18,,,,0,CCR,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol8:i,,,,,,,1. CCR Address Update,,,,5,,
+Create test data.,IDB-106,33657,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,olivercurson,kieranrichards,kieranrichards,2018-05-18,2018-05-23,2018-07-27,2018-05-23,,,,0,ClearCore,,,,,kieranrichards,,,,,;22/May/18 9:54 AM;samwhite;14400,,0,14400,,,0,14400,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol3:,,,,,,,1. CCR Address Update,,,,8,,
+Gather and collate baseline metrics,IDB-105,33656,,New Feature,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-18,2018-06-26,2018-07-27,2018-06-19,Software Development Life Cycle - V1.1,,,0,Background,,,"# Refine baseline metrics.
+ # Reliable method for logging.
+ # Simple process method for document and process metrics.
+ # Basic presentation on results.",,kieranrichards,richardbeech,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03nlc:er,,,,,,,1. CCR Address Update,2. Improve CCR Process,3. Get clear on ClearCore,,8,,
+Understand ClearCore 'Poll for change' report.,IDB-104,33655,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,richardbeech,kieranrichards,kieranrichards,2018-05-18,2018-05-21,2018-07-27,2018-05-21,,,,0,ClearCore,,,,,kieranrichards,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol1:w,,,,,,,1. CCR Address Update,,,,2,,
+Pickup changes from ClearCore - consume ClearCore CSV or SQL.,IDB-103,33654,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,kieranrichards,kieranrichards,2018-05-18,2018-05-22,2018-07-27,2018-05-22,,,,0,ClearCore,,,,,kieranrichards,,,,,;22/May/18 9:52 AM;samwhite;3600,,0,3600,,,0,3600,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol1:r,,,,,,,1. CCR Address Update,,,,2,,
+Understand business processes for CCR,IDB-102,33653,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,,samwhite,samwhite,2018-05-17,2018-05-23,2018-07-27,2018-05-23,,,,0,Background,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol1:i,,,,,,,1. CCR Address Update,,,,2,,
+"Architectural understanding of systems (ClearCore, CCR & Mendix)",IDB-101,33648,,Task,Done,IDB,iPaaS [Dell Boomi],software,samwhite,iPaaS [Dell Boomi] Project,,Medium,Done,kieranrichards,samwhite,samwhite,2018-05-17,2018-05-21,2018-07-27,2018-05-21,,,,0,Background,,,,,samwhite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0|i03ol1:,,,,,,,1. CCR Address Update,,,,2,,

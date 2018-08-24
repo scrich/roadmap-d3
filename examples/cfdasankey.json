@@ -1,0 +1,74 @@
+{
+  "links": [
+    {
+      "source": "Mobile",
+      "target": "foo",
+      "value": "1"
+    },
+    {
+      "source": "Mobile",
+      "target": "bar",
+      "value": "1"
+    },
+    {
+      "source": "My Account",
+      "target": "bar",
+      "value": "1"
+    },
+    {
+      "source": "Customer index",
+      "target": "foo",
+      "value": "1"
+    },
+    {
+      "source": "foo",
+      "target": "wibble",
+      "value": "1"
+    },
+    {
+      "source": "bar",
+      "target": "wibble",
+      "value": "2"
+    },
+     {
+      "source": "foo",
+      "target": "po",
+      "value": "1"
+    },
+    {
+      "source":"Mobile",
+      "target": "ting",
+      "value": "1"
+    },
+      {
+      "source":"ting",
+      "target": "bar",
+      "value": "1"
+    }
+
+  ],
+  "nodes": [
+    {
+      "name": "Mobile"
+    },
+    {
+      "name": "My Account"
+    },
+    {
+      "name": "Customer index"
+    },
+    {
+      "name": "foo"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "wibble"
+    },
+    {
+      "name":"po"
+    },
+    {"name":"ting"}
+  ]
+}
